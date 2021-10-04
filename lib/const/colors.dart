@@ -5,4 +5,5 @@ class AppColors {
   static const primary = Colors.blue;
   static const danger = Colors.red;
   static const success = Colors.green;
+  static const secundary = Colors.teal;
 }

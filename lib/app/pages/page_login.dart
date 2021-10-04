@@ -17,7 +17,13 @@ class _PageLoginState extends State<PageLogin> {
   final controller = ControllerLogin();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _body());
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+        centerTitle: true,
+      ),
+      body: _body(),
+    );
   }
 
   Widget _body() {

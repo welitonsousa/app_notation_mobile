@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class ControllerSplash extends ChangeNotifier {
-  double size = 300;
+  double size = 200;
   bool smalling = false;
   Ticker ticker = Ticker((_) {});
 
   void startAnimation() {
     ticker = Ticker((now) {
       if (size == 0) {
-        navigator.pushReplacementNamed(NamedRoutes.LOGIN);
+        navigator.pushReplacementNamed(NamedRoutes.WELLCOME);
         ticker.stop();
         ticker.dispose();
       } else if (!smalling) {

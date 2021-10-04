@@ -1,5 +1,4 @@
 import 'package:app_notation_mobile/app/controllers/controller_splash.dart';
-import 'package:app_notation_mobile/const/colors.dart';
 import 'package:app_notation_mobile/const/images.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +25,6 @@ class _PageSplashState extends State<PageSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, widget) => _body(),
