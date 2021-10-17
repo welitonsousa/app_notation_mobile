@@ -23,14 +23,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> getInstangePrefs() async {
-    prefs = await SharedPreferences.getInstance(); 
+    prefs = await SharedPreferences.getInstance();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(platform: TargetPlatform.iOS),
       title: Env.TITLE,
+      debugShowCheckedModeBanner: Env.DEBUG_MODE,
       routes: routes.routes,
       navigatorKey: navigatorKey,
     );

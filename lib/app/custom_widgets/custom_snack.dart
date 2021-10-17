@@ -1,5 +1,6 @@
 import 'package:app_notation_mobile/const/colors.dart';
 import 'package:app_notation_mobile/const/routes.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class CustomSnakbar {
@@ -9,7 +10,7 @@ class CustomSnakbar {
         duration: Duration(seconds: 2),
         backgroundColor: background ?? AppColors.success,
         content: Container(
-          height: 70,
+          height: 30,
           child: Center(
             child: Text(
               text,
@@ -22,16 +23,17 @@ class CustomSnakbar {
     );
   }
 
-  static void error({String message = "Ops, algo deu errado"}) {
+  static void error(DioError e) {
+    String? message = e.response?.data["message"];
     ScaffoldMessenger.of(navigator.context).showSnackBar(
       SnackBar(
         duration: Duration(seconds: 3),
         backgroundColor: AppColors.danger,
         content: Container(
-          height: 70,
+          height: 30,
           child: Center(
             child: Text(
-              message,
+              message ?? "Ops, algo deu errado!",
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),

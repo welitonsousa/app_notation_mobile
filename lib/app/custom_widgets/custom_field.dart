@@ -105,3 +105,7 @@ nextFocus(BuildContext context){
 unfocus(BuildContext context){
   FocusScope.of(context).unfocus();
 }
+
+changeFocus(BuildContext context, FocusNode focus) {
+  FocusScope.of(context).requestFocus(focus);
+}

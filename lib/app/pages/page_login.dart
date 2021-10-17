@@ -1,5 +1,6 @@
 import 'package:app_notation_mobile/app/controllers/controller_login.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_card.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/const/images.dart';
 import 'package:flutter/material.dart';
@@ -15,20 +16,27 @@ class PageLogin extends StatefulWidget {
 
 class _PageLoginState extends State<PageLogin> {
   final controller = ControllerLogin();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _body(),
       appBar: AppBar(
         title: Text("Login"),
         centerTitle: true,
       ),
-      body: _body(),
     );
   }
 
   Widget _body() {
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       children: [
         Container(
           height: 300,
@@ -46,43 +54,51 @@ class _PageLoginState extends State<PageLogin> {
   }
 
   Widget form() {
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (context, snapshot) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CustomField(
-                label: "Email",
-                controller: controller.editEmail,
-                onTap: controller.teddyController.email,
-                onChange: (value) => controller.teddyController.check(value),
-                enable: !controller.loadig,
-                validator: (value) => Validations.email(value!),
-                onEditingComplete: () {
-                  nextFocus(context);
-                  controller.teddyController.pass();
-                }),
-            CustomField(
-                label: "Senha",
-                validator: (value) => Validations.password(value!),
-                enable: !controller.loadig,
-                controller: controller.editPass,
-                isPass: true,
-                onTap: controller.teddyController.pass,
-                textInputAction: TextInputAction.done,
-                onEditingComplete: () {
-                  unfocus(context);
-                  controller.teddyController.email();
-                }),
-            CustomButton(
-              label: "Login",
-              loading: controller.loadig,
-              onPressed: controller.login,
+    return CustomCard(
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (context, snapshot) {
+          return Form(
+            key: controller.form,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CustomField(
+                    label: "Email",
+                    controller: controller.editEmail,
+                    onTap: controller.teddyController.email,
+                    onChange: (value) => controller.teddyController.check(value),
+                    enable: !controller.loadig,
+                    validator: (value) => Validations.email(value!),
+                    onEditingComplete: () {
+                      nextFocus(context);
+                      controller.teddyController.pass();
+                    }),
+                CustomField(
+                    label: "Senha",
+                    validator: (value) => Validations.password(value!),
+                    enable: !controller.loadig,
+                    controller: controller.editPass,
+                    isPass: true,
+                    onTap: controller.teddyController.pass,
+                    textInputAction: TextInputAction.done,
+                    onEditingComplete: () {
+                      unfocus(context);
+                      controller.teddyController.email();
+                    }),
+                CustomButton(
+                  label: "Login",
+                  loading: controller.loadig,
+                  onPressed: () {
+                    controller.teddyController.email();
+                    controller.login();
+                  },
+                ),
+              ],
             ),
-          ],
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

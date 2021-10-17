@@ -13,6 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.7
   rive: ^0.7.28
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -36,11 +37,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: amatic
+      fonts:
+        - asset: assets/fonts/amatic-regular.ttf
+        - asset: assets/fonts/amatic-bold.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
