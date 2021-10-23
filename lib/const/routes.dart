@@ -1,3 +1,4 @@
+import 'package:app_notation_mobile/app/pages/page_home.dart';
 import 'package:app_notation_mobile/app/pages/page_login.dart';
 import 'package:app_notation_mobile/app/pages/page_registration.dart';
 import 'package:app_notation_mobile/app/pages/page_splash.dart';
@@ -13,6 +14,7 @@ class Routes {
     NamedRoutes.LOGIN: (context) => PageLogin(),
     NamedRoutes.WELLCOME: (context) => PageWellcome(),
     NamedRoutes.REGISTRATION: (context) => PageRegistration(),
+    NamedRoutes.HOME: (context) => PageHome(),
   };
 }
 
@@ -20,5 +22,6 @@ class NamedRoutes {
   static const SPLASH = "/";
   static const LOGIN = "/login";
   static const WELLCOME = "/wellcome";
+  static const HOME = "/home";
   static const REGISTRATION = "/registration";
 }

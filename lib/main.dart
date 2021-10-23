@@ -1,3 +1,4 @@
+import 'package:app_notation_mobile/app/controllers/controller_theme.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:app_notation_mobile/env.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final routes = Routes();
+  final controller = ControllerTheme.instance;
 
   @override
   void initState() {
@@ -24,16 +26,22 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> getInstangePrefs() async {
     prefs = await SharedPreferences.getInstance();
+    ControllerTheme.instance.loadTheme();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(platform: TargetPlatform.iOS),
-      title: Env.TITLE,
-      debugShowCheckedModeBanner: Env.DEBUG_MODE,
-      routes: routes.routes,
-      navigatorKey: navigatorKey,
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, snapshot) {
+        return MaterialApp(
+          theme: controller.theme,
+          title: Env.TITLE,
+          debugShowCheckedModeBanner: Env.DEBUG_MODE,
+          routes: routes.routes,
+          navigatorKey: navigatorKey,
+        );
+      }
     );
   }
 }

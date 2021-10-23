@@ -36,7 +36,7 @@ class _PageRegistrationState extends State<PageRegistration> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Text(
-              "App Notatino",
+              "App Notation",
               style: TextStyle(fontFamily: "amatic", fontSize: 60),
             ),
           ),
