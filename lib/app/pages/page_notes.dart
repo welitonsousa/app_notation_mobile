@@ -23,6 +23,10 @@ class _PageNotesState extends State<PageNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, snapshot) {

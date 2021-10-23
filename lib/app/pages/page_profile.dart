@@ -1,10 +1,10 @@
 import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
+import 'package:app_notation_mobile/app/controllers/controller_theme.dart';
+import 'package:app_notation_mobile/app/controllers/toggl_controller.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_avatar.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
 import 'package:app_notation_mobile/const/colors.dart';
-import 'package:app_notation_mobile/const/images.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
 
 class PageProfile extends StatefulWidget {
   const PageProfile({Key? key}) : super(key: key);
@@ -38,17 +38,12 @@ class _PageProfileState extends State<PageProfile> {
           ),
         ),
         ListTile(
-          title: Text("Tema do aplicativo", style: TextStyle(fontSize: 20),),
+          title: Text("Tema do aplicativo", style: TextStyle(fontSize: 20)),
+          onTap: ControllerTheme.instance.changeTheme,
           leading: Container(
             width: 50,
             height: 50,
-            child: GestureDetector(
-              onTap: controller.changeToggl,
-              child: RiveAnimation.asset(
-                AppImages.TOGGLE,
-                controllers: controller.togglController.listControllers,
-              ),
-            ),
+            child: CustomToggl(value: !ControllerTheme.instance.isDark),
           ),
         ),
         CustomButton(

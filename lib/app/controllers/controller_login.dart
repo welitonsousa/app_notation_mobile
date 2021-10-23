@@ -24,11 +24,12 @@ class ControllerLogin extends ChangeNotifier {
         loadig = true;
         notifyListeners();
         final user = await repositorie.login(email: editEmail.text, pass: editPass.text);
+        await prefs.setString("user", jsonEncode(user.toJson()));
+        ControllerProfile.instance.loadUser();
+        
         navigator.popUntil(ModalRoute.withName(NamedRoutes.HOME));
         navigator.pushNamed(NamedRoutes.HOME);
       
-        await prefs.setString("user", jsonEncode(user.toJson()));
-        ControllerProfile.instance.loadUser();
       } on DioError catch (e) {
         CustomSnakbar.error(e);
       } finally {

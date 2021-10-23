@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ControllerNotes extends ChangeNotifier {
-  static final instance = ControllerNotes();
+  static ControllerNotes instance = ControllerNotes();
 
   final repository = RepositoryNotes();
 
