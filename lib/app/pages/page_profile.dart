@@ -17,9 +17,18 @@ class _PageProfileState extends State<PageProfile> {
   final controller = ControllerProfile.instance;
 
   @override
+  void initState() {
+    controller.getme();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _body(),
+      body: AnimatedBuilder(
+        animation: controller,
+        builder: (context, widget) => _body(),
+      ),
     );
   }
 

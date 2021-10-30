@@ -12,6 +12,11 @@ class RepositoryUser {
     return user;
   }
 
+  Future<ModelUser> getme() async{
+    final response = await dio.get("/user/me");
+    return ModelUser.fromjson(response.data);
+  }
+
   Future<void> registration({
     required String email,
     required String pass,

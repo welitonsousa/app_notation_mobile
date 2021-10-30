@@ -1,7 +1,10 @@
 import 'package:app_notation_mobile/app/controllers/controller_notes.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_card.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_loading.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_modal_notes.dart';
 import 'package:app_notation_mobile/app/models/model_notes.dart';
+import 'package:app_notation_mobile/const/colors.dart';
+import 'package:app_notation_mobile/const/routes.dart';
 import 'package:flutter/material.dart';
 
 class PageNotes extends StatefulWidget {
@@ -25,7 +28,12 @@ class _PageNotesState extends State<PageNotes> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: navigator.context,
+            builder: (context) => CustomDialogNotes(),
+          );
+        },
       ),
       body: AnimatedBuilder(
         animation: controller,
@@ -54,7 +62,31 @@ class _PageNotesState extends State<PageNotes> {
     return CustomCard(
       child: ListTile(
         title: Text(note.title),
+        trailing: deleteItem(note),
+        onTap: () {
+          showDialog(
+            context: navigator.context,
+            builder: (context) => CustomDialogNotes(note: note),
+          );
+        },
       ),
+    );
+  }
+
+  Widget deleteItem(ModelNotes note) {
+    final controllerDelete = ControllerNotes();
+    return AnimatedBuilder(
+      animation: controllerDelete,
+      builder: (context, widget) {
+        return Visibility(
+          visible: !controllerDelete.loadingDelete,
+          replacement: Container(width: 40, child: CustomCircular(color: AppColors.danger)),
+          child: IconButton(
+            icon: Icon(Icons.delete, color: AppColors.danger),
+            onPressed: () => controllerDelete.deleteNote(note.id),
+          ),
+        );
+      },
     );
   }
 }

@@ -9,6 +9,7 @@ class CustomField extends StatefulWidget {
   final FocusNode? focus;
   final int maxLines;
   final bool? isPass;
+  final int minLines;
   final void Function()? onTap;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
@@ -23,6 +24,7 @@ class CustomField extends StatefulWidget {
   
   CustomField({
     this.onTap,
+    this.minLines = 1,
     this.enable,
     this.placeholder = '',
     this.controller,
@@ -69,7 +71,7 @@ class _CustomFieldState extends State<CustomField> {
         textInputAction: this.widget.textInputAction,
         validator: this.widget.validator,
         onChanged: this.widget.onChange,
-        minLines: 1,
+        minLines: this.widget.minLines,
         maxLines: this.widget.maxLines,
         textAlign: this.widget.center ? TextAlign.center : TextAlign.left,
         focusNode: this.widget.focus,

@@ -5,11 +5,21 @@ class RepositoryNotes {
   Future<List<ModelNotes>> getNotes() async {
     List<ModelNotes> list = [];
     final response = await dio.get("/notation");
-    
     (response.data["notations"] as List).forEach((e) {
       list.add(ModelNotes.fromJson(e));
     });
-
     return list;
+  }
+
+  Future<void> createNote(ModelNotes note) async {
+    await dio.post("/notation", data: note.toJsont());
+  }
+
+  Future<void> updateNote(ModelNotes note) async {
+    await dio.put("/notation", data: note.toJsont());
+  }
+
+  Future<void> deleteNote(String id) async {
+    await dio.delete("/notation/$id");
   }
 }
