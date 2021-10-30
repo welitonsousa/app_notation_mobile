@@ -4,6 +4,7 @@ import 'package:app_notation_mobile/app/controllers/toggl_controller.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_avatar.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
 import 'package:app_notation_mobile/const/colors.dart';
+import 'package:app_notation_mobile/const/routes.dart';
 import 'package:flutter/material.dart';
 
 class PageProfile extends StatefulWidget {
@@ -61,6 +62,7 @@ class _PageProfileState extends State<PageProfile> {
         ),
         CustomButton(
           label: "Alterar senha",
+          onPressed: () => navigator.pushNamed(NamedRoutes.CHANGE_PASSWORD),
         ),
         CustomButton(
           label: "Sair da conta",

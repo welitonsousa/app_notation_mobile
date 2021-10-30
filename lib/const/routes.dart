@@ -1,3 +1,4 @@
+import 'package:app_notation_mobile/app/pages/page_change_password.dart';
 import 'package:app_notation_mobile/app/pages/page_home.dart';
 import 'package:app_notation_mobile/app/pages/page_login.dart';
 import 'package:app_notation_mobile/app/pages/page_registration.dart';
@@ -15,6 +16,7 @@ class Routes {
     NamedRoutes.WELLCOME: (context) => PageWellcome(),
     NamedRoutes.REGISTRATION: (context) => PageRegistration(),
     NamedRoutes.HOME: (context) => PageHome(),
+    NamedRoutes.CHANGE_PASSWORD: (context) => PageChangePassword(),
   };
 }
 
@@ -24,4 +26,5 @@ class NamedRoutes {
   static const WELLCOME = "/wellcome";
   static const HOME = "/home";
   static const REGISTRATION = "/registration";
+  static const CHANGE_PASSWORD = "/change-password";
 }

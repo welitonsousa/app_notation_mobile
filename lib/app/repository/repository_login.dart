@@ -28,4 +28,16 @@ class RepositoryUser {
       "password": pass,
     });
   }
+
+  Future<void> changePassword({
+    required String pass,
+    required String newPass,
+    required bool logOutAll,
+  }) async {
+    await dio.put("/user/pass", data: {
+      "pass": pass,
+      "new_pass": newPass,
+      "logout": logOutAll,
+    });
+  }
 }
