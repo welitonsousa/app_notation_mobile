@@ -69,6 +69,7 @@ class _PageLoginState extends State<PageLogin> {
                     onTap: controller.teddyController.email,
                     onChange: (value) => controller.teddyController.check(value),
                     enable: !controller.loadig,
+                    textInputType: TextInputType.emailAddress,
                     validator: (value) => Validations.email(value!),
                     onEditingComplete: () {
                       nextFocus(context);

@@ -38,14 +38,21 @@ class _CustomDialogNotesState extends State<CustomDialogNotes> {
         animation: controller,
         builder: (context, snapshot) {
           return Container(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-            constraints: BoxConstraints(maxHeight: 400),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  this._inputs(),
-                  this._actions(),
-                ],
+            constraints: BoxConstraints(maxHeight: 500),
+            child: Scrollbar(
+              isAlwaysShown: true,
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    children: [
+                      Container(height: 20),
+                      this._inputs(),
+                      this._actions(),
+                      Container(height: 20),
+                    ],
+                  ),
+                ),
               ),
             ),
           );

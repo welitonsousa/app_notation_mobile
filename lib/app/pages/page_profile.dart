@@ -56,7 +56,11 @@ class _PageProfileState extends State<PageProfile> {
           ),
         ),
         CustomButton(
-          label: "Alerar senha",
+          label: "Contate-nos",
+          onPressed: controller.sendEmail,
+        ),
+        CustomButton(
+          label: "Alterar senha",
         ),
         CustomButton(
           label: "Sair da conta",
