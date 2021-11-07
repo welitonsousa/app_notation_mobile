@@ -2,7 +2,7 @@
     package="wellmath.appnotation.app.app_notation_mobile">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="app_notation_mobile"
+        android:label="App Notation"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
