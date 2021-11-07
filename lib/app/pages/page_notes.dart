@@ -1,5 +1,6 @@
 import 'package:app_notation_mobile/app/controllers/controller_notes.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_card.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_loading.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_modal_notes.dart';
 import 'package:app_notation_mobile/app/models/model_notes.dart';
@@ -23,9 +24,29 @@ class _PageNotesState extends State<PageNotes> {
     super.initState();
   }
 
+  PreferredSizeWidget search() {
+    return PreferredSize(
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        child: CustomField(
+          placeholder: "Pesquisar",
+          textInputAction: TextInputAction.search,
+          controller: controller.editSearch,
+          onChange: controller.seach,
+          icon: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: controller.clearSearch,
+          ),
+        ),
+      ),
+      preferredSize: Size(double.infinity, 33),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(bottom: search()),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {

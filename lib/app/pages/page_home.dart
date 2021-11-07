@@ -27,6 +27,7 @@ class _PageHomeState extends State<PageHome> {
       builder: (context, snapshot) {
         return Scaffold(
           appBar: AppBar(
+            elevation: 0,
             title: Text("App Notation"),
             centerTitle: true,
           ),

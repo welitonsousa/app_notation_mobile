@@ -1,3 +1,4 @@
+import 'package:app_notation_mobile/app/controllers/controller_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,7 +22,8 @@ class CustomField extends StatefulWidget {
   final Widget? lateralName;
   final Function(String)? onChange;
   final bool center;
-  
+  final Widget? icon;
+
   CustomField({
     this.onTap,
     this.minLines = 1,
@@ -29,6 +31,7 @@ class CustomField extends StatefulWidget {
     this.placeholder = '',
     this.controller,
     this.label = '',
+    this.icon,
     this.focus,
     this.center = false,
     this.maxLines = 1,
@@ -39,7 +42,8 @@ class CustomField extends StatefulWidget {
     this.validator,
     this.inputFormatters,
     this.max,
-    this.onEditingComplete, this.lateralName,
+    this.onEditingComplete,
+    this.lateralName,
     this.onChange,
   });
 
@@ -59,7 +63,8 @@ class _CustomFieldState extends State<CustomField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      decoration: BoxDecoration(color: ControllerTheme.instance.theme.cardColor, borderRadius: BorderRadius.circular(5)),
       child: new TextFormField(
         onTap: this.widget.onTap,
         textCapitalization: this.widget.textCapitalization,
@@ -80,18 +85,20 @@ class _CustomFieldState extends State<CustomField> {
         onEditingComplete: this.widget.onEditingComplete,
         decoration: InputDecoration(
           hintText: this.widget.placeholder,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+         
           border: const OutlineInputBorder(borderSide: const BorderSide()),
           labelText: this.widget.label,
           icon: this.widget.lateralName ?? null,
           suffixIcon: Visibility(
-            visible: pass != null,
-            child: IconButton(
-              onPressed: () {
-                setState(() {
-                  pass = !pass!;
-                });
-              },
-              icon: Icon(pass ?? false ?  Icons.visibility_off : Icons.visibility),
+            visible: this.widget.icon != null,
+            child: this.widget.icon ?? Container(width: 0, height: 0),
+            replacement: Visibility(
+              visible: pass != null,
+              child: IconButton(
+                onPressed: () => setState(() => pass = !pass!),
+                icon: Icon(pass ?? false ? Icons.visibility_off : Icons.visibility),
+              ),
             ),
           ),
         ),
@@ -100,11 +107,11 @@ class _CustomFieldState extends State<CustomField> {
   }
 }
 
-nextFocus(BuildContext context){
+nextFocus(BuildContext context) {
   FocusScope.of(context).nextFocus();
 }
 
-unfocus(BuildContext context){
+unfocus(BuildContext context) {
   FocusScope.of(context).unfocus();
 }
 

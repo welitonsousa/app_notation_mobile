@@ -25,6 +25,9 @@ class _PageProfileState extends State<PageProfile> {
 
   @override
   Widget build(BuildContext context) {
+    print("vamos");
+    FocusScope.of(context).unfocus();
+
     return Scaffold(
       body: AnimatedBuilder(
         animation: controller,

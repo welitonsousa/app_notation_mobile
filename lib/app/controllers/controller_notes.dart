@@ -10,19 +10,37 @@ class ControllerNotes extends ChangeNotifier {
   final repository = RepositoryNotes();
 
   List<ModelNotes> notes = [];
+  List<ModelNotes> notesOriginal = [];
+  final editSearch = TextEditingController();
+
   bool loading = false;
+
+  void clearSearch() {
+    this.editSearch.clear();
+    this.notes = [...this.notesOriginal];
+    notifyListeners();
+  }
+
+  void seach(String value) {
+    String search = value.toLowerCase();
+    notes = notesOriginal.where((e) {
+      return e.title.toLowerCase().contains(search) || e.body.toLowerCase().contains(search);
+    }).toList();
+    notifyListeners();
+  }
 
   Future<void> getNotes({bool isReload = false}) async {
     try {
-      if (notes.isEmpty || isReload) {
-        if (!isReload) loading = true;
+      if (this.notesOriginal.isEmpty || isReload) {
+        if (!isReload) this.loading = true;
         notifyListeners();
-        notes = await repository.getNotes();
+        this.notesOriginal = await this.repository.getNotes();
+        this.notes = [...this.notesOriginal];
       }
     } on DioError catch (e) {
       CustomSnakbar.error(e);
     } finally {
-      loading = false;
+      this.loading = false;
       notifyListeners();
     }
   }
