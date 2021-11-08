@@ -4,8 +4,10 @@ class ModelNotes {
   String body;
   String userId;
   String date;
+  String dateUpdate;
 
   ModelNotes({
+    this.dateUpdate = "",
     required this.id,
     required this.body,
     required this.date,
@@ -15,6 +17,7 @@ class ModelNotes {
 
   factory ModelNotes.fromJson(Map json) {
     return ModelNotes(
+      dateUpdate: json["updated_at"] ?? "",
       body: json["body"],
       date: json["created_at"],
       id: json["id"],

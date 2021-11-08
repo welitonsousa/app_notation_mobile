@@ -14,6 +14,7 @@ class ControllerNotes extends ChangeNotifier {
   final editSearch = TextEditingController();
 
   bool loading = false;
+  bool error = false;
 
   void clearSearch() {
     this.editSearch.clear();
@@ -29,15 +30,21 @@ class ControllerNotes extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getNotes({bool isReload = false}) async {
+  Future<void> getNotes({bool isReload = false, bool clean = false}) async {
+    if (clean) {
+      notesOriginal.clear();
+      notes.clear();
+    }
     try {
       if (this.notesOriginal.isEmpty || isReload) {
         if (!isReload) this.loading = true;
+        this.error = false;
         notifyListeners();
         this.notesOriginal = await this.repository.getNotes();
         this.notes = [...this.notesOriginal];
       }
     } on DioError catch (e) {
+      this.error = true;
       CustomSnakbar.error(e);
     } finally {
       this.loading = false;

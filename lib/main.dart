@@ -2,6 +2,8 @@ import 'package:app_notation_mobile/app/controllers/controller_theme.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:app_notation_mobile/env.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences prefs;
@@ -20,6 +22,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    initializeDateFormatting();
     this.getInstangePrefs();
     super.initState();
   }
@@ -28,6 +31,8 @@ class _MyAppState extends State<MyApp> {
     prefs = await SharedPreferences.getInstance();
     ControllerTheme.instance.loadTheme();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
