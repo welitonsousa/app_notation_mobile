@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_snack.dart';
-import 'package:app_notation_mobile/app/repository/repository_login.dart';
+import 'package:app_notation_mobile/app/repository/repository_user.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:app_notation_mobile/main.dart';
 import 'package:dio/dio.dart';

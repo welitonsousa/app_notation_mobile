@@ -2,13 +2,15 @@ import 'dart:convert';
 import 'package:app_notation_mobile/app/controllers/controller_notes.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_snack.dart';
 import 'package:app_notation_mobile/app/models/model_user.dart';
-import 'package:app_notation_mobile/app/repository/repository_login.dart';
+import 'package:app_notation_mobile/app/repository/repository_user.dart';
 import 'package:app_notation_mobile/const/colors.dart';
 import 'package:app_notation_mobile/const/dio.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:app_notation_mobile/env.dart';
 import 'package:app_notation_mobile/main.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ControllerProfile extends ChangeNotifier {
@@ -20,6 +22,8 @@ class ControllerProfile extends ChangeNotifier {
     final _user = await repo.getme();
     user.picture = _user.picture;
     user.user = _user.user;
+    await prefs.setString("user", jsonEncode(user.toJson()));
+
     notifyListeners();
   }
 
@@ -44,6 +48,29 @@ class ControllerProfile extends ChangeNotifier {
       await launch(emailLaunchUri.toString());
     } catch (e) {
       CustomSnakbar.show(text: "Algo deu errado", background: AppColors.danger);
+    }
+  }
+
+  bool loadingImage = false;
+  Future openGallery({ImageSource imageSource = ImageSource.gallery}) async {
+    try {
+      final ImagePicker picker = ImagePicker();
+
+      final image = await picker.pickImage(source: imageSource, );
+      if (image != null) {
+        this.loadingImage = true;
+        notifyListeners();
+        final link = await repo.sendFile(image.path);
+        instance.user.picture = link;
+        await prefs.setString("user", jsonEncode(user.toJson()));
+
+        CustomSnakbar.show(text: "Foto de perfil atualizada");
+      }
+    } on DioError catch (e) {
+      CustomSnakbar.error(e);
+    } finally {
+      loadingImage = false;
+      notifyListeners();
     }
   }
 }

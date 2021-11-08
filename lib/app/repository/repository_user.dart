@@ -1,5 +1,6 @@
 import 'package:app_notation_mobile/app/models/model_user.dart';
 import 'package:app_notation_mobile/const/dio.dart';
+import 'package:dio/dio.dart';
 
 class RepositoryUser {
   Future<ModelUser> login({required String email, required String pass}) async {
@@ -40,4 +41,16 @@ class RepositoryUser {
       "logout": logOutAll,
     });
   }
+
+  Future<String> sendFile(String path, {String? message}) async {
+    String fileName = path.split('/').last;
+    
+    FormData data = FormData.fromMap({
+      'files': await MultipartFile.fromFile(path, filename: fileName),
+    });
+    
+    final response = await dio.put('/user/picture', data: data);
+    return response.data['picture'];
+  }
+
 }
