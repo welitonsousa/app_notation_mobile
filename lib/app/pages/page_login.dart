@@ -3,6 +3,7 @@ import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_card.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/const/images.dart';
+import 'package:app_notation_mobile/const/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:app_notation_mobile/utils/validations.dart';
 import 'package:rive/rive.dart';
@@ -94,6 +95,10 @@ class _PageLoginState extends State<PageLogin> {
                     controller.teddyController.email();
                     controller.login();
                   },
+                ),
+                TextButton(
+                  child: Text("Esqueci minha senha"),
+                  onPressed: () => navigator.pushNamed(NamedRoutes.RESET_PASSWORD),
                 ),
               ],
             ),

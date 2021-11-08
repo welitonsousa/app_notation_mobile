@@ -23,6 +23,7 @@ class CustomField extends StatefulWidget {
   final Function(String)? onChange;
   final bool center;
   final Widget? icon;
+  final Color? bgColor;
 
   CustomField({
     this.onTap,
@@ -45,6 +46,8 @@ class CustomField extends StatefulWidget {
     this.onEditingComplete,
     this.lateralName,
     this.onChange,
+    this.bgColor,
+
   });
 
   @override
@@ -64,7 +67,7 @@ class _CustomFieldState extends State<CustomField> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
-      decoration: BoxDecoration(color: ControllerTheme.instance.theme.cardColor, borderRadius: BorderRadius.circular(5)),
+      decoration: BoxDecoration(color: this.widget.bgColor ?? ControllerTheme.instance.theme.cardColor, borderRadius: BorderRadius.circular(5)),
       child: new TextFormField(
         onTap: this.widget.onTap,
         textCapitalization: this.widget.textCapitalization,

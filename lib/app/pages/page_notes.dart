@@ -59,13 +59,13 @@ class _PageNotesState extends State<PageNotes> {
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, snapshot) {
-          return _body();
+          return body;
         },
       ),
     );
   }
 
-  Widget _body() {
+  Widget get body {
     if (controller.loading) return CustomCircular();
     return RefreshIndicator(
       onRefresh: () => controller.getNotes(isReload: true),
@@ -85,6 +85,7 @@ class _PageNotesState extends State<PageNotes> {
         title: Text(note.title),
         trailing: deleteItem(note),
         onTap: () {
+          FocusScope.of(context).unfocus();
           showDialog(
             context: navigator.context,
             builder: (context) => CustomDialogNotes(note: note),

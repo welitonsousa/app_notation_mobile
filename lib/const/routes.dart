@@ -2,6 +2,7 @@ import 'package:app_notation_mobile/app/pages/page_change_password.dart';
 import 'package:app_notation_mobile/app/pages/page_home.dart';
 import 'package:app_notation_mobile/app/pages/page_login.dart';
 import 'package:app_notation_mobile/app/pages/page_registration.dart';
+import 'package:app_notation_mobile/app/pages/page_reset_pass/page_reset_pass.dart';
 import 'package:app_notation_mobile/app/pages/page_splash.dart';
 import 'package:app_notation_mobile/app/pages/page_wellcome.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class Routes {
     NamedRoutes.REGISTRATION: (context) => PageRegistration(),
     NamedRoutes.HOME: (context) => PageHome(),
     NamedRoutes.CHANGE_PASSWORD: (context) => PageChangePassword(),
+    NamedRoutes.RESET_PASSWORD: (context) => PageResetPass(),
   };
 }
 
@@ -27,4 +29,5 @@ class NamedRoutes {
   static const HOME = "/home";
   static const REGISTRATION = "/registration";
   static const CHANGE_PASSWORD = "/change-password";
+  static const RESET_PASSWORD = "/reset-password";
 }
