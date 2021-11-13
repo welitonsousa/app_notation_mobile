@@ -1,5 +1,5 @@
 import 'package:app_notation_mobile/app/controllers/controller_reset_pass.dart';
-import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_button.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/utils/validations.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +52,7 @@ class _ViewValideCodeState extends State<ViewValideCode> {
           child: Text.rich(
             TextSpan(text: "Enviamos um código de verificação para o seu email", children: [
               TextSpan(
-                  text: "\n\nverifique támbem na caixa de span", style: TextStyle(fontSize: 14))
+                  text: "\n\nVerifique também a caixa de Spam", style: TextStyle(fontSize: 14))
             ]),
             style: TextStyle(fontSize: 23),
             textAlign: TextAlign.center,

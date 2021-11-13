@@ -1,5 +1,5 @@
 import 'package:app_notation_mobile/app/controllers/controller_login.dart';
-import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_button.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_card.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/const/images.dart';

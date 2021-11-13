@@ -1,5 +1,5 @@
 import 'package:app_notation_mobile/app/controllers/controller_reset_pass.dart';
-import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_button.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/utils/validations.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _ViewSendEmailState extends State<ViewSendEmail> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 50),
           child: Text(
-            "Enviaremos um código unico de verificação da conta atravez do seu email",
+            "Enviaremos um código único de verificação da conta através do seu email",
             style: TextStyle(fontSize: 23),
             textAlign: TextAlign.center,
           ),

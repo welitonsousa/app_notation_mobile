@@ -1,5 +1,5 @@
 import 'package:app_notation_mobile/app/controllers/controller_reset_pass.dart';
-import 'package:app_notation_mobile/app/pages/page_reset_pass/view_resete_pass.dart';
+import 'package:app_notation_mobile/app/pages/page_reset_pass/view_reset_pass.dart';
 import 'package:app_notation_mobile/app/pages/page_reset_pass/view_sent_email.dart';
 import 'package:app_notation_mobile/app/pages/page_reset_pass/view_valide_code.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class _PageResetPassState extends State<PageResetPass> {
       children: [
         ViewSendEmail(controller: this.controller),
         ViewValideCode(controller: this.controller),
-        ViewResetePass(controller: this.controller),
+        ViewResetPass(controller: this.controller),
       ],
     );
   }

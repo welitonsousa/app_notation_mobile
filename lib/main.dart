@@ -23,11 +23,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     initializeDateFormatting();
-    this.getInstangePrefs();
+    this.getInstancePrefs();
     super.initState();
   }
 
-  Future<void> getInstangePrefs() async {
+  Future<void> getInstancePrefs() async {
     prefs = await SharedPreferences.getInstance();
     ControllerTheme.instance.loadTheme();
   }

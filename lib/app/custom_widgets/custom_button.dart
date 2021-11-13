@@ -23,7 +23,9 @@ class CustomButton extends StatelessWidget {
       height: 50,
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: TextButton(
-        onPressed: this.onPressed ?? () {},
+        onPressed: () {
+          if (this.onPressed != null && !this.loading) this.onPressed!();
+        },
         child: Visibility(
           visible: loading,
           child: CustomCircular(color: AppColors.white),

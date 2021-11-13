@@ -2,7 +2,7 @@ import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
 import 'package:app_notation_mobile/app/controllers/controller_theme.dart';
 import 'package:app_notation_mobile/app/controllers/toggl_controller.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_avatar.dart';
-import 'package:app_notation_mobile/app/custom_widgets/custom_buttom.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_button.dart';
 import 'package:app_notation_mobile/const/colors.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:flutter/material.dart';
