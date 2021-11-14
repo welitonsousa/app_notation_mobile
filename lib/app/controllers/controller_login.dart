@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'controller_teddy.dart';
 
 class ControllerLogin extends ChangeNotifier {
-  bool loadig = false;
+  bool loading = false;
 
-  final repositorie = RepositoryUser();
+  final repository = RepositoryUser();
   final teddyController = ControllerTeddy();
   final editEmail = TextEditingController();
   final editPass = TextEditingController();
@@ -21,9 +21,9 @@ class ControllerLogin extends ChangeNotifier {
   Future<void> login() async {
     if (form.currentState!.validate()) {
       try {
-        loadig = true;
+        loading = true;
         notifyListeners();
-        final user = await repositorie.login(email: editEmail.text, pass: editPass.text);
+        final user = await repository.login(email: editEmail.text, pass: editPass.text);
         await prefs.setString("user", jsonEncode(user.toJson()));
         ControllerProfile.instance.loadUser();
         
@@ -31,9 +31,9 @@ class ControllerLogin extends ChangeNotifier {
         navigator.pushNamed(NamedRoutes.HOME);
       
       } on DioError catch (e) {
-        CustomSnakbar.error(e);
+        CustomSnackbar.error(e);
       } finally {
-        loadig = false;
+        loading = false;
         notifyListeners();
       }
     }

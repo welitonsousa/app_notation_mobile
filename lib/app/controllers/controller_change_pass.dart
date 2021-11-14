@@ -31,10 +31,10 @@ class ControllerChangePass extends ChangeNotifier {
           pass: editPassword.text,
         );
         navigator.pop();
-        CustomSnakbar.show(text: "Senha atualizada com sucesso");
+        CustomSnackbar.show(text: "Senha atualizada com sucesso");
         if (this.logOutAll) ControllerProfile.instance.logOut();
       } on DioError catch (e) {
-        CustomSnakbar.error(e);
+        CustomSnackbar.error(e);
       } finally {
         loading = false;
         notifyListeners();

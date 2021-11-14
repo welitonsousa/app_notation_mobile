@@ -4,8 +4,8 @@ import 'package:app_notation_mobile/const/colors.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:flutter/material.dart';
 
-class PageWellcome extends StatelessWidget {
-  const PageWellcome({Key? key}) : super(key: key);
+class PageWelcome extends StatelessWidget {
+  const PageWelcome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class PageWellcome extends StatelessWidget {
                 Center(child: Text("não possui uma conta?")),
                 CustomButton(
                   label: "Cadastre-se",
-                  backgroundColor: AppColors.secundary,
+                  backgroundColor: AppColors.secondary,
                   onPressed: () => navigator.pushNamed(NamedRoutes.REGISTRATION),
                 ),
                 Container(height: 20),

@@ -12,11 +12,11 @@ class RepositoryNotes {
   }
 
   Future<void> createNote(ModelNotes note) async {
-    await dio.post("/notation", data: note.toJsont());
+    await dio.post("/notation", data: note.toJson());
   }
 
   Future<void> updateNote(ModelNotes note) async {
-    await dio.put("/notation", data: note.toJsont());
+    await dio.put("/notation", data: note.toJson());
   }
 
   Future<void> deleteNote(String id) async {

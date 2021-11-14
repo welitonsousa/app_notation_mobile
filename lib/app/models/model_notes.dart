@@ -26,7 +26,7 @@ class ModelNotes {
     );
   }
 
-  Map<String, dynamic> toJsont() {
+  Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {
       "id": this.id,
       "title": this.title,

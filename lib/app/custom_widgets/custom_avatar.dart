@@ -1,5 +1,5 @@
 import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
-import 'package:app_notation_mobile/app/custom_widgets/custom_botton_sheet.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_button_sheet.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_loading.dart';
 import 'package:app_notation_mobile/app/pages/page_view_image.dart';
 import 'package:app_notation_mobile/const/colors.dart';
@@ -39,19 +39,8 @@ class CustomAvatar extends StatelessWidget {
                   ),
                   child: Visibility(
                     visible: this.image.isEmpty,
-                    child: Icon(
-                      Icons.person_outline,
-                      size: 200,
-                      color: AppColors.primary,
-                    ),
-                    replacement: ClipOval(
-                      child: Image.network(
-                        this.image,
-                        height: 200,
-                        width: 200,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    child: this._localAvatar,
+                    replacement: this._networkAvatar,
                   ),
                 ),
               ),
@@ -62,8 +51,44 @@ class CustomAvatar extends StatelessWidget {
     );
   }
 
+  Widget get _localAvatar {
+    return Icon(
+      Icons.person_outline,
+      size: 200,
+      color: AppColors.primary,
+    );
+  }
+
+  Widget get _networkAvatar {
+    return ClipOval(
+      child: Image.network(
+        this.image,
+        height: 200,
+        width: 200,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => this._localAvatar,
+        loadingBuilder: this._loadingImage,
+      ),
+    );
+  }
+
+  Widget _loadingImage(context, child, loadingProgress) {
+    if (loadingProgress == null) return child;
+    return Container(
+      height: 200,
+      width: 200,
+      child: Center(
+        child: CircularProgressIndicator(
+          value: loadingProgress.expectedTotalBytes != null
+              ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+              : null,
+        ),
+      ),
+    );
+  }
+
   void showActions() {
-    ButtomSheet.showMenuBottomSheet(
+    ButtonSheet.showMenuBottomSheet(
       title: "Imagem de perfil",
       options: [
         Visibility(
@@ -90,7 +115,7 @@ class CustomAvatar extends StatelessWidget {
 
   void imageDirectory() {
     navigator.pop();
-    ButtomSheet.showMenuBottomSheet(
+    ButtonSheet.showMenuBottomSheet(
       title: "Escolha o local da imagem",
       options: [
         TextButton(

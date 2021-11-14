@@ -18,8 +18,8 @@ class ControllerProfile extends ChangeNotifier {
   final repo = RepositoryUser();
   late ModelUser user;
 
-  Future<void> getme() async {
-    final _user = await repo.getme();
+  Future<void> getMe() async {
+    final _user = await repo.getMe();
     user.picture = _user.picture;
     user.user = _user.user;
     await prefs.setString("user", jsonEncode(user.toJson()));
@@ -30,16 +30,16 @@ class ControllerProfile extends ChangeNotifier {
   Future<void> loadUser() async {
     final data = prefs.getString("user") ?? "{}";
     final json = jsonDecode(data);
-    user = ModelUser.fromjson(json);
+    user = ModelUser.fromJson(json);
     dio.options.headers = {"Authorization": "Bearer ${user.token}"};
   }
 
   Future<void> logOut() async {
     await prefs.setString("user", "{}");
     ControllerNotes.instance = ControllerNotes();
-    navigator.popUntil(ModalRoute.withName(NamedRoutes.WELLCOME));
+    navigator.popUntil(ModalRoute.withName(NamedRoutes.WELCOME));
     dio.options = options;
-    navigator.pushNamed(NamedRoutes.WELLCOME);
+    navigator.pushNamed(NamedRoutes.WELCOME);
   }
 
   Future<void> sendEmail() async {
@@ -47,7 +47,7 @@ class ControllerProfile extends ChangeNotifier {
       final Uri emailLaunchUri = Uri(scheme: 'mailto', path: Env.EMAIL_APP);
       await launch(emailLaunchUri.toString());
     } catch (e) {
-      CustomSnakbar.show(text: "Algo deu errado", background: AppColors.danger);
+      CustomSnackbar.show(text: "Algo deu errado", background: AppColors.danger);
     }
   }
 
@@ -64,10 +64,10 @@ class ControllerProfile extends ChangeNotifier {
         instance.user.picture = link;
         await prefs.setString("user", jsonEncode(user.toJson()));
 
-        CustomSnakbar.show(text: "Foto de perfil atualizada");
+        CustomSnackbar.show(text: "Foto de perfil atualizada");
       }
     } on DioError catch (e) {
-      CustomSnakbar.error(e);
+      CustomSnackbar.error(e);
     } finally {
       loadingImage = false;
       notifyListeners();

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 
-class CustomToggl extends StatelessWidget {
+class CustomToggle extends StatelessWidget {
   final active = SimpleAnimation("day_idle", autoplay: true);
-  final desactive = SimpleAnimation("night_idle", autoplay: true);
+  final desative = SimpleAnimation("night_idle", autoplay: true);
   
   final bool value;
-  CustomToggl({this.value = true});
+  CustomToggle({this.value = true});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CustomToggl extends StatelessWidget {
       replacement: Container(
         child: RiveAnimation.asset(
           AppImages.TOGGLE,
-          controllers: [desactive],
+          controllers: [desative],
         ),
       ),
     );

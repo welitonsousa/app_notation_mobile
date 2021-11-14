@@ -28,14 +28,14 @@ class ControllerNotesDialog extends ChangeNotifier {
     await repo.updateNote(loadNote());
     await ControllerNotes.instance.getNotes(isReload: true);
 
-    CustomSnakbar.show(text: "Nota atualizada com sucesso");
+    CustomSnackbar.show(text: "Nota atualizada com sucesso");
   }
 
   Future<void> createNote() async {
     await repo.createNote(loadNote());
     await ControllerNotes.instance.getNotes(isReload: true);
 
-    CustomSnakbar.show(text: "Nota cadastrada com sucesso");
+    CustomSnackbar.show(text: "Nota cadastrada com sucesso");
   }
 
   ModelNotes loadNote() {
@@ -59,7 +59,7 @@ class ControllerNotesDialog extends ChangeNotifier {
           await createNote();
         navigator.pop();
       } on DioError catch (e) {
-        CustomSnakbar.error(e);
+        CustomSnackbar.error(e);
       } finally {
         this.loading = false;
         notifyListeners();

@@ -9,7 +9,7 @@ class ModelUser {
     required this.token,
   });
 
-  factory ModelUser.fromjson(Map json) {
+  factory ModelUser.fromJson(Map json) {
     return ModelUser(
       token: json["token"] ?? "",
       user: json["user"] ?? "",

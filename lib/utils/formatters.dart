@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class Formatters{
+class Formatters {
   static String dateFormat(String? date) {
     if (date != null && date.isNotEmpty) {
       final now = DateTime.now();
@@ -9,12 +9,12 @@ class Formatters{
 
       if (difference.inDays < 3) {
         if (now.day == timeAgo.day) {
-          return "Hoje," + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date));
+          return "Hoje," + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date)).trim();
         } else {
-          return "Ontem," + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date));
+          return "Ontem," + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date)).trim();
         }
       } else {
-        return DateFormat("", "pt_BR").add_yMEd().format(DateTime.parse(date));
+        return DateFormat("", "pt_BR").add_yMEd().format(DateTime.parse(date)).trim();
       }
     }
     return "";

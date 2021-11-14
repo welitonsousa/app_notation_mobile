@@ -9,13 +9,13 @@ class RepositoryUser {
       "password": pass,
     });
 
-    final user = ModelUser.fromjson(response.data);
+    final user = ModelUser.fromJson(response.data);
     return user;
   }
 
-  Future<ModelUser> getme() async{
+  Future<ModelUser> getMe() async{
     final response = await dio.get("/user/me");
-    return ModelUser.fromjson(response.data);
+    return ModelUser.fromJson(response.data);
   }
 
   Future<void> registration({

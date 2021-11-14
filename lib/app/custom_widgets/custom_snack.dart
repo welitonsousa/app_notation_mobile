@@ -3,7 +3,7 @@ import 'package:app_notation_mobile/const/routes.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class CustomSnakbar {
+class CustomSnackbar {
   static void show({required String text, Color? background}) {
     ScaffoldMessenger.of(navigator.context).showSnackBar(
       SnackBar(

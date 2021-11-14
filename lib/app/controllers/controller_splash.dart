@@ -5,14 +5,14 @@ import 'package:flutter/scheduler.dart';
 
 class ControllerSplash extends ChangeNotifier {
   double size = 200;
-  bool smalling = false;
+  bool growing = true;
   Ticker ticker = Ticker((_) {});
 
   Future<void> changePage() async {
     final profile = ControllerProfile.instance;
     await profile.loadUser();
     if (profile.user.token.isEmpty) {
-      navigator.pushReplacementNamed(NamedRoutes.WELLCOME);
+      navigator.pushReplacementNamed(NamedRoutes.WELCOME);
     } else {
       navigator.pushReplacementNamed(NamedRoutes.HOME);
     }
@@ -24,12 +24,12 @@ class ControllerSplash extends ChangeNotifier {
         changePage();
         ticker.stop();
         ticker.dispose();
-      } else if (!smalling) {
+      } else if (growing) {
         size += 10;
       } else if (size >= 10) {
         size -= 10;
       }
-      if (size > 370) smalling = true;
+      if (size > 370) growing = false;
 
       notifyListeners();
     });

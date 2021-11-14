@@ -69,7 +69,7 @@ class _PageLoginState extends State<PageLogin> {
                     controller: controller.editEmail,
                     onTap: controller.teddyController.email,
                     onChange: (value) => controller.teddyController.check(value),
-                    enable: !controller.loadig,
+                    enable: !controller.loading,
                     textInputType: TextInputType.emailAddress,
                     validator: (value) => Validations.email(value!),
                     onEditingComplete: () {
@@ -79,7 +79,7 @@ class _PageLoginState extends State<PageLogin> {
                 CustomField(
                     label: "Senha",
                     validator: (value) => Validations.password(value!),
-                    enable: !controller.loadig,
+                    enable: !controller.loading,
                     controller: controller.editPass,
                     isPass: true,
                     onTap: controller.teddyController.pass,
@@ -90,7 +90,7 @@ class _PageLoginState extends State<PageLogin> {
                     }),
                 CustomButton(
                   label: "Login",
-                  loading: controller.loadig,
+                  loading: controller.loading,
                   onPressed: () {
                     controller.teddyController.email();
                     controller.login();

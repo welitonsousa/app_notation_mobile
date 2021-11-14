@@ -1,6 +1,6 @@
 import 'package:app_notation_mobile/app/controllers/controller_home.dart';
 import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
-import 'package:app_notation_mobile/app/pages/page_notes.dart';
+import 'package:app_notation_mobile/app/pages/page_notes/page_notes.dart';
 import 'package:app_notation_mobile/app/pages/page_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class _PageHomeState extends State<PageHome> {
 
   @override
   void initState() {
-    ControllerProfile.instance.getme();
+    ControllerProfile.instance.getMe();
     super.initState();
   }
 

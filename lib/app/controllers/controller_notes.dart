@@ -1,6 +1,7 @@
 import 'package:app_notation_mobile/app/custom_widgets/custom_snack.dart';
 import 'package:app_notation_mobile/app/models/model_notes.dart';
 import 'package:app_notation_mobile/app/repository/repository_notes.dart';
+import 'package:app_notation_mobile/const/routes.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ControllerNotes extends ChangeNotifier {
     notifyListeners();
   }
 
-  void seach(String value) {
+  void search(String value) {
     String search = value.toLowerCase();
     notes = notesOriginal.where((e) {
       return e.title.toLowerCase().contains(search) || e.body.toLowerCase().contains(search);
@@ -45,7 +46,7 @@ class ControllerNotes extends ChangeNotifier {
       }
     } on DioError catch (e) {
       this.error = true;
-      CustomSnakbar.error(e);
+      CustomSnackbar.error(e);
     } finally {
       this.loading = false;
       notifyListeners();
@@ -53,21 +54,20 @@ class ControllerNotes extends ChangeNotifier {
   }
 
   bool loadingDelete = false;
-  Future<bool> deleteNote(String id) async {
+  Future<void> deleteNote(String id) async {
     try {
       loadingDelete = true;
       notifyListeners();
       await repository.deleteNote(id);
       instance.notes.removeWhere((e) => e.id == id);
       instance.notifyListeners();
-      CustomSnakbar.show(text: "Nota deletada");
-      return true;
+      navigator.pop();
+      CustomSnackbar.show(text: "Nota deletada");
     } on DioError catch (e) {
-      CustomSnakbar.error(e);
+      CustomSnackbar.error(e);
     } finally {
       loadingDelete = false;
       notifyListeners();
     }
-    return false;
   }
 }

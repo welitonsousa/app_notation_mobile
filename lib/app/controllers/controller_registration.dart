@@ -26,13 +26,13 @@ class ControllerRegistration extends ChangeNotifier {
         );
         loading = false;
         notifyListeners();
-        CustomSnakbar.show(text: "Usuário criado com sucesso");
+        CustomSnackbar.show(text: "Usuário criado com sucesso");
         await Future.delayed(Duration(milliseconds: 1000));
         navigator.popAndPushNamed(NamedRoutes.LOGIN);
       } on DioError catch (e) {
         loading = false;
         notifyListeners();
-        CustomSnakbar.error(e);
+        CustomSnackbar.error(e);
       }
     }
   }

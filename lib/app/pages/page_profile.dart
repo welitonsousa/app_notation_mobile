@@ -1,6 +1,6 @@
 import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
 import 'package:app_notation_mobile/app/controllers/controller_theme.dart';
-import 'package:app_notation_mobile/app/controllers/toggl_controller.dart';
+import 'package:app_notation_mobile/app/controllers/toggle_controller.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_avatar.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_button.dart';
 import 'package:app_notation_mobile/const/colors.dart';
@@ -19,7 +19,7 @@ class _PageProfileState extends State<PageProfile> {
 
   @override
   void initState() {
-    controller.getme();
+    controller.getMe();
     super.initState();
   }
 
@@ -30,12 +30,12 @@ class _PageProfileState extends State<PageProfile> {
     return Scaffold(
       body: AnimatedBuilder(
         animation: controller,
-        builder: (context, widget) => _body(),
+        builder: (context, widget) => _body,
       ),
     );
   }
 
-  Widget _body() {
+  Widget get _body {
     return ListView(
       padding: const EdgeInsets.all(10),
       children: [
@@ -55,7 +55,7 @@ class _PageProfileState extends State<PageProfile> {
           leading: Container(
             width: 50,
             height: 50,
-            child: CustomToggl(value: !ControllerTheme.instance.isDark),
+            child: CustomToggle(value: !ControllerTheme.instance.isDark),
           ),
         ),
         CustomButton(

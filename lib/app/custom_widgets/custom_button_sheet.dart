@@ -1,7 +1,7 @@
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:flutter/material.dart';
 
-class ButtomSheet {
+class ButtonSheet {
   static Future showMenuBottomSheet({
     required String title,
     required List<Widget> options,

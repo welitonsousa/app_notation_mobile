@@ -30,7 +30,7 @@ class ControllerResetPass extends ChangeNotifier {
         await repo.sendEmailCode(email: editEmail.text);
         this.nextPage();
       } on DioError catch (e) {
-        CustomSnakbar.error(e);
+        CustomSnackbar.error(e);
       } finally {
         loadingButton = false;
         notifyListeners();
@@ -46,7 +46,7 @@ class ControllerResetPass extends ChangeNotifier {
         await repo.valideCode(code: editCode.text, email: editEmail.text);
         nextPage();
       } on DioError catch (e) {
-        CustomSnakbar.error(e);
+        CustomSnackbar.error(e);
       } finally {
         loadingButton = false;
         notifyListeners();
@@ -61,9 +61,9 @@ class ControllerResetPass extends ChangeNotifier {
         notifyListeners();
         await repo.resetPass(email: editEmail.text, code: editCode.text, newPass: editNewPass.text);
         navigator.pop();
-        CustomSnakbar.show(text: "Sua senha foi alterada");
+        CustomSnackbar.show(text: "Sua senha foi alterada");
       } on DioError catch (e) {
-        CustomSnakbar.error(e);
+        CustomSnackbar.error(e);
       } finally {
         loadingButton = false;
         notifyListeners();
