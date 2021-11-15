@@ -1,4 +1,4 @@
-package wellmath.appnotation.app.app_notation_mobile
+package wellmath.appnotation.app
 
 import io.flutter.embedding.android.FlutterActivity
 
