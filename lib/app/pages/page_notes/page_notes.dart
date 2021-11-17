@@ -34,10 +34,15 @@ class _PageNotesState extends State<PageNotes> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          showDialog(
-            context: navigator.context,
-            builder: (context) => CustomDialogNotes(),
+          navigator.push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => CustomDialogNotes(),
+            ),
           );
+          // showDialog(
+          //   context: navigator.context,
+          //   builder: (context) => (),
+          // );
         },
       ),
       body: AnimatedBuilder(
@@ -127,9 +132,10 @@ class _PageNotesState extends State<PageNotes> {
         trailing: deleteItem(note),
         onTap: () {
           FocusScope.of(context).unfocus();
-          showDialog(
-            context: navigator.context,
-            builder: (context) => CustomDialogNotes(note: note),
+          navigator.push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => CustomDialogNotes(note: note),
+            ),
           );
         },
       ),

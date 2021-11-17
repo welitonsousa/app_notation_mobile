@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:app_notation_mobile/app/controllers/controller_notes.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_snack.dart';
 import 'package:app_notation_mobile/app/models/model_notes.dart';
@@ -62,7 +64,7 @@ class ControllerNotesDialog extends ChangeNotifier {
         CustomSnackbar.error(e);
       } finally {
         this.loading = false;
-        notifyListeners();
+        Timer.run(() => notifyListeners());
       }
     }
   }
