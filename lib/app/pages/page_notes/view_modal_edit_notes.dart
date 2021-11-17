@@ -39,23 +39,15 @@ class _CustomDialogNotesState extends State<CustomDialogNotes> {
       builder: (context, snapshot) {
         return Scaffold(
           appBar: AppBar(title: Text("Nota")),
-          bottomSheet: this._actions(),
-          body: Container(
-            constraints: BoxConstraints(maxHeight: 500),
-            child: Scrollbar(
-              isAlwaysShown: true,
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Column(
-                    children: [
-                      Container(height: 20),
-                      this._inputs(),
-                      Container(height: 20),
-                    ],
-                  ),
-                ),
-              ),
+          bottomNavigationBar: this._actions(),
+          body: Scrollbar(
+            isAlwaysShown: true,
+            child: ListView(
+              padding: const EdgeInsets.all(10),
+              children: [
+                this._inputs(),
+                Container(height: 100),
+              ],
             ),
           ),
         );
