@@ -6,6 +6,7 @@ import 'package:app_notation_mobile/const/colors.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CustomAvatar extends StatelessWidget {
   final String image;
@@ -60,30 +61,24 @@ class CustomAvatar extends StatelessWidget {
   }
 
   Widget get _networkAvatar {
-    return ClipOval(
-      child: Image.network(
-        this.image,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(1000),
+      child: CachedNetworkImage(
+        imageUrl: this.image,
         height: 200,
         width: 200,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => this._localAvatar,
-        loadingBuilder: this._loadingImage,
+        progressIndicatorBuilder: this._loadingImage,
+        errorWidget: (context, url, error) => this._localAvatar,
       ),
     );
   }
 
-  Widget _loadingImage(context, child, loadingProgress) {
-    if (loadingProgress == null) return child;
+  Widget _loadingImage(context, url, downloadProgress) {
     return Container(
       height: 200,
       width: 200,
-      child: Center(
-        child: CircularProgressIndicator(
-          value: loadingProgress.expectedTotalBytes != null
-              ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-              : null,
-        ),
-      ),
+      child: Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
     );
   }
 

@@ -9,9 +9,9 @@ class Formatters {
 
       if (difference.inDays < 3) {
         if (now.day == timeAgo.day) {
-          return "Hoje," + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date)).trim();
+          return "Hoje, " + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date)).trim();
         } else {
-          return "Ontem," + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date)).trim();
+          return "Ontem, " + DateFormat("", "pt_BR").add_Hm().format(DateTime.parse(date)).trim();
         }
       } else {
         return DateFormat("", "pt_BR").add_yMEd().format(DateTime.parse(date)).trim();

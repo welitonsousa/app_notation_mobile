@@ -26,8 +26,8 @@ class _PageProfileState extends State<PageProfile> {
   @override
   Widget build(BuildContext context) {
     FocusScope.of(context).unfocus();
-
     return Scaffold(
+      appBar: AppBar(title: Text("Perfil"), elevation: 0),
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, widget) => _body,
@@ -57,6 +57,10 @@ class _PageProfileState extends State<PageProfile> {
             height: 50,
             child: CustomToggle(value: !ControllerTheme.instance.isDark),
           ),
+        ),
+        CustomButton(
+          label: "Acessar página web",
+          onPressed: controller.webPage,
         ),
         CustomButton(
           label: "Contate-nos",

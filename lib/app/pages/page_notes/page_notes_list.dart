@@ -1,19 +1,19 @@
 import 'package:app_notation_mobile/app/controllers/controller_notes.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_card.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_empty.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_error.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_loading.dart';
+import 'package:app_notation_mobile/app/models/model_state.dart';
 import 'package:app_notation_mobile/app/pages/page_notes/view_modal_delete_note.dart';
-import 'package:app_notation_mobile/app/pages/page_notes/view_modal_edit_notes.dart';
+import 'package:app_notation_mobile/app/pages/page_notes/page_notes_form.dart';
 import 'package:app_notation_mobile/app/models/model_notes.dart';
 import 'package:app_notation_mobile/const/colors.dart';
-import 'package:app_notation_mobile/const/images.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:app_notation_mobile/utils/formatters.dart';
 import 'package:flutter/material.dart';
 
 class PageNotes extends StatefulWidget {
-  const PageNotes({Key? key}) : super(key: key);
-
   @override
   _PageNotesState createState() => _PageNotesState();
 }
@@ -30,25 +30,16 @@ class _PageNotesState extends State<PageNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(bottom: search()),
+      appBar: AppBar(title: Text("Notas"), bottom: search(), elevation: 0),
+      body: AnimatedBuilder(animation: controller, builder: (context, snapshot) => body),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
           navigator.push(
             MaterialPageRoute(
-              builder: (BuildContext context) => CustomDialogNotes(),
+              builder: (BuildContext context) => PageNotesForm(),
             ),
           );
-          // showDialog(
-          //   context: navigator.context,
-          //   builder: (context) => (),
-          // );
-        },
-      ),
-      body: AnimatedBuilder(
-        animation: controller,
-        builder: (context, snapshot) {
-          return body;
         },
       ),
     );
@@ -56,8 +47,9 @@ class _PageNotesState extends State<PageNotes> {
 
   PreferredSizeWidget search() {
     return PreferredSize(
+      preferredSize: Size(double.infinity, 70),
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: CustomField(
           placeholder: "Pesquisar",
           textInputAction: TextInputAction.search,
@@ -69,17 +61,16 @@ class _PageNotesState extends State<PageNotes> {
           ),
         ),
       ),
-      preferredSize: Size(double.infinity, 33),
     );
   }
 
   Widget get body {
-    if (controller.loading) {
+    if (controller.state == ModelState.loading) {
       return CustomCircular(size: 40);
-    } else if (controller.error) {
-      return this.error;
+    } else if (controller.state == ModelState.error) {
+      return CustomError(action: () => controller.getNotes(isReload: true));
     } else if (controller.notes.isEmpty) {
-      return emptyList;
+      return CustomEmpty(action: () => controller.getNotes(isReload: true));
     }
 
     return RefreshIndicator(
@@ -91,34 +82,6 @@ class _PageNotesState extends State<PageNotes> {
           return itemNote(controller.notes[index]);
         },
       ),
-    );
-  }
-
-  Widget get error {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(child: Icon(Icons.error_outline, color: AppColors.danger, size: 70)),
-        Container(height: 20),
-        Center(child: Text("Algo deu errado", style: TextStyle(fontSize: 20))),
-        Center(
-          child: TextButton(
-            child: Text("Tente novamente"),
-            onPressed: () => controller.getNotes(clean: true),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget get emptyList {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(child: Image.asset(AppImages.CLIP_BOARD, height: 100)),
-        Container(height: 20),
-        Center(child: Text("Lista vazia", style: TextStyle(fontSize: 22))),
-      ],
     );
   }
 
@@ -134,7 +97,7 @@ class _PageNotesState extends State<PageNotes> {
           FocusScope.of(context).unfocus();
           navigator.push(
             MaterialPageRoute(
-              builder: (BuildContext context) => CustomDialogNotes(note: note),
+              builder: (BuildContext context) => PageNotesForm(note: note),
             ),
           );
         },

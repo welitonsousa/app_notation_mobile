@@ -8,15 +8,15 @@ import 'package:app_notation_mobile/utils/validations.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 
-class CustomDialogNotes extends StatefulWidget {
+class PageNotesForm extends StatefulWidget {
   final ModelNotes? note;
-  CustomDialogNotes({this.note});
+  PageNotesForm({this.note});
 
   @override
-  _CustomDialogNotesState createState() => _CustomDialogNotesState();
+  _PageNotesFormState createState() => _PageNotesFormState();
 }
 
-class _CustomDialogNotesState extends State<CustomDialogNotes> {
+class _PageNotesFormState extends State<PageNotesForm> {
   final controller = ControllerNotesDialog();
   HtmlEditorController controllerEditor = HtmlEditorController();
 
@@ -39,16 +39,13 @@ class _CustomDialogNotesState extends State<CustomDialogNotes> {
       builder: (context, snapshot) {
         return Scaffold(
           appBar: AppBar(title: Text("Nota")),
-          bottomNavigationBar: this._actions(),
-          body: Scrollbar(
-            isAlwaysShown: true,
-            child: ListView(
-              padding: const EdgeInsets.all(10),
-              children: [
-                this._inputs(),
-                Container(height: 100),
-              ],
-            ),
+          bottomNavigationBar: this._actions,
+          body: ListView(
+            padding: const EdgeInsets.all(10),
+            children: [
+              this._inputs(),
+              Container(height: 100),
+            ],
           ),
         );
       },
@@ -66,35 +63,53 @@ class _CustomDialogNotesState extends State<CustomDialogNotes> {
             controller: controller.editTitle,
             validator: (value) => Validations.generic(value: value),
           ),
-          HtmlEditor(
-            controller: controllerEditor,
-            callbacks: Callbacks(
-              onChangeContent: (value) {
-                controller.editBody.text = value ?? '';
-              },
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: Colors.black45),
             ),
-            htmlEditorOptions: HtmlEditorOptions(
-              initialText: controller.editBody.text,
+            padding: const EdgeInsets.all(3),
+            child: HtmlEditor(
+              controller: controllerEditor,
+              callbacks: Callbacks(
+                onChangeContent: (value) {
+                  controller.editBody.text = value ?? '';
+                },
+              ),
+              otherOptions: OtherOptions(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              htmlEditorOptions: HtmlEditorOptions(initialText: controller.editBody.text),
+              htmlToolbarOptions: HtmlToolbarOptions(
+                defaultToolbarButtons: [
+                  FontButtons(clearAll: false),
+                  ColorButtons(),
+                  ListButtons(listStyles: true),
+                  ParagraphButtons(textDirection: false, lineHeight: false, caseConverter: false),
+                  InsertButtons(
+                    picture: false,
+                    link: false,
+                    video: false,
+                    audio: false,
+                    hr: false,
+                    otherFile: false,
+                  ),
+                  StyleButtons(),
+                  FontSettingButtons(fontSizeUnit: false),
+                ],
+                toolbarPosition: ToolbarPosition.belowEditor,
+                buttonBorderRadius: BorderRadius.circular(10),
+              ),
             ),
-            htmlToolbarOptions: HtmlToolbarOptions(toolbarType: ToolbarType.nativeGrid),
           ),
-
-          // CustomField(
-          //   label: "Nota",
-          //   maxLines: 8,
-          //   minLines: 3,
-          //   enable: !controller.loading,
-          //   controller: controller.editBody,
-          //   textInputType: TextInputType.multiline,
-          //   textInputAction: TextInputAction.newline,
-          //   validator: (value) => Validations.generic(value: value),
-          // ),
         ],
       ),
     );
   }
 
-  Widget _actions() {
+  Widget get _actions {
     return Container(
       height: 50,
       margin: const EdgeInsets.all(10),

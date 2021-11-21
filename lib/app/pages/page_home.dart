@@ -1,6 +1,6 @@
 import 'package:app_notation_mobile/app/controllers/controller_home.dart';
 import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
-import 'package:app_notation_mobile/app/pages/page_notes/page_notes.dart';
+import 'package:app_notation_mobile/app/pages/page_notes/page_notes_list.dart';
 import 'package:app_notation_mobile/app/pages/page_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -26,13 +26,8 @@ class _PageHomeState extends State<PageHome> {
       animation: controller,
       builder: (context, snapshot) {
         return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            title: Text("App Notation"),
-            centerTitle: true,
-          ),
           body: _body(),
-          bottomNavigationBar: _bottomNavigationBar(),
+          bottomSheet: _bottomNavigationBar(),
         );
       },
     );
@@ -57,13 +52,17 @@ class _PageHomeState extends State<PageHome> {
   }
 
   Widget _body() {
-    return PageView(
-      controller: controller.pageController,
-      onPageChanged: controller.changeIndex,
-      children: [
-        PageNotes(),
-        PageProfile(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 50),
+      child: PageView(
+        controller: controller.pageController,
+        onPageChanged: controller.changeIndex,
+        physics: ClampingScrollPhysics(),
+        children: [
+          PageNotes(),
+          PageProfile(),
+        ],
+      ),
     );
   }
 }

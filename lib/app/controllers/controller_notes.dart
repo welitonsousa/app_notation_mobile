@@ -1,5 +1,7 @@
 import 'package:app_notation_mobile/app/custom_widgets/custom_snack.dart';
 import 'package:app_notation_mobile/app/models/model_notes.dart';
+import 'package:app_notation_mobile/app/models/model_state.dart';
+export 'package:app_notation_mobile/app/models/model_state.dart';
 import 'package:app_notation_mobile/app/repository/repository_notes.dart';
 import 'package:app_notation_mobile/const/routes.dart';
 import 'package:dio/dio.dart';
@@ -14,8 +16,7 @@ class ControllerNotes extends ChangeNotifier {
   List<ModelNotes> notesOriginal = [];
   final editSearch = TextEditingController();
 
-  bool loading = false;
-  bool error = false;
+  ModelState state = ModelState.stope;
 
   void clearSearch() {
     this.editSearch.clear();
@@ -31,24 +32,19 @@ class ControllerNotes extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getNotes({bool isReload = false, bool clean = false}) async {
-    if (clean) {
-      notesOriginal.clear();
-      notes.clear();
-    }
+  Future<void> getNotes({bool isReload = false}) async {
     try {
-      if (this.notesOriginal.isEmpty || isReload) {
-        if (!isReload) this.loading = true;
-        this.error = false;
+      if (this.state == ModelState.stope || isReload) {
+        if (!isReload || state == ModelState.error) this.state = ModelState.loading;
         notifyListeners();
         this.notesOriginal = await this.repository.getNotes();
         this.notes = [...this.notesOriginal];
+        this.state = ModelState.success;
       }
     } on DioError catch (e) {
-      this.error = true;
+      this.state = ModelState.error;
       CustomSnackbar.error(e);
     } finally {
-      this.loading = false;
       notifyListeners();
     }
   }

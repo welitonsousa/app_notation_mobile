@@ -12,6 +12,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class ControllerProfile extends ChangeNotifier {
   static final instance = ControllerProfile();
@@ -51,20 +52,38 @@ class ControllerProfile extends ChangeNotifier {
     }
   }
 
+  Future<void> webPage() async {
+    try {
+      await launch(Env.WEB_ADDRESS);
+    } catch (e) {
+      CustomSnackbar.show(text: "Algo deu errado", background: AppColors.danger);
+    }
+  }
+
   bool loadingImage = false;
   Future openGallery({ImageSource imageSource = ImageSource.gallery}) async {
     try {
       final ImagePicker picker = ImagePicker();
 
-      final image = await picker.pickImage(source: imageSource, );
+      final image = await picker.pickImage(source: imageSource);
       if (image != null) {
-        this.loadingImage = true;
-        notifyListeners();
-        final link = await repo.sendFile(image.path);
-        instance.user.picture = link;
-        await prefs.setString("user", jsonEncode(user.toJson()));
-
-        CustomSnackbar.show(text: "Foto de perfil atualizada");
+        final croppedFile = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          androidUiSettings: AndroidUiSettings(
+            toolbarTitle: '',
+            toolbarColor: AppColors.primary,
+            toolbarWidgetColor: AppColors.white,
+          ),
+          aspectRatio: CropAspectRatio(ratioX: 4, ratioY: 4),
+        );
+        if (croppedFile != null) {
+          this.loadingImage = true;
+          notifyListeners();
+          final link = await repo.sendFile(croppedFile.path);
+          instance.user.picture = link;
+          await prefs.setString("user", jsonEncode(user.toJson()));
+          CustomSnackbar.show(text: "Foto de perfil atualizada");
+        }
       }
     } on DioError catch (e) {
       CustomSnackbar.error(e);
