@@ -6,10 +6,10 @@ import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_loading.dart';
 import 'package:app_notation_mobile/app/models/model_state.dart';
 import 'package:app_notation_mobile/app/pages/page_notes/view_modal_delete_note.dart';
-import 'package:app_notation_mobile/app/pages/page_notes/page_notes_form.dart';
 import 'package:app_notation_mobile/app/models/model_notes.dart';
 import 'package:app_notation_mobile/const/colors.dart';
 import 'package:app_notation_mobile/const/routes.dart';
+import 'package:app_notation_mobile/main.dart';
 import 'package:app_notation_mobile/utils/formatters.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,17 @@ class _PageNotesState extends State<PageNotes> {
   @override
   initState() {
     controller.getNotes();
+    this._fastAction();
     super.initState();
+  }
+
+  void _fastAction() {
+    if (fastAction == "new_note") {
+      fastAction = "";
+      Future.delayed(Duration(milliseconds: 500)).then((e) {
+        navigator.pushNamed(NamedRoutes.NOTE_FORM);
+      });
+    }
   }
 
   @override
@@ -33,15 +43,7 @@ class _PageNotesState extends State<PageNotes> {
       appBar: AppBar(title: Text("Notas"), bottom: search(), elevation: 0),
       body: AnimatedBuilder(animation: controller, builder: (context, snapshot) => body),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          navigator.push(
-            MaterialPageRoute(
-              builder: (BuildContext context) => PageNotesForm(),
-            ),
-          );
-        },
-      ),
+          child: Icon(Icons.add), onPressed: () => navigator.pushNamed(NamedRoutes.NOTE_FORM)),
     );
   }
 
@@ -95,11 +97,7 @@ class _PageNotesState extends State<PageNotes> {
         trailing: deleteItem(note),
         onTap: () {
           FocusScope.of(context).unfocus();
-          navigator.push(
-            MaterialPageRoute(
-              builder: (BuildContext context) => PageNotesForm(note: note),
-            ),
-          );
+          navigator.pushNamed(NamedRoutes.NOTE_FORM, arguments: note);
         },
       ),
     );

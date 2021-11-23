@@ -10,6 +10,7 @@ import 'package:html_editor_enhanced/html_editor.dart';
 
 class PageNotesForm extends StatefulWidget {
   final ModelNotes? note;
+
   PageNotesForm({this.note});
 
   @override
@@ -17,6 +18,7 @@ class PageNotesForm extends StatefulWidget {
 }
 
 class _PageNotesFormState extends State<PageNotesForm> {
+  final focusTitle = new FocusNode();
   final controller = ControllerNotesDialog();
   HtmlEditorController controllerEditor = HtmlEditorController();
 
@@ -59,48 +61,52 @@ class _PageNotesFormState extends State<PageNotesForm> {
         children: [
           CustomField(
             label: "Titulo",
+            focus: this.focusTitle,
             enable: !controller.loading,
             controller: controller.editTitle,
             validator: (value) => Validations.generic(value: value),
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: Colors.black45),
-            ),
-            padding: const EdgeInsets.all(3),
-            child: HtmlEditor(
-              controller: controllerEditor,
-              callbacks: Callbacks(
-                onChangeContent: (value) {
-                  controller.editBody.text = value ?? '';
-                },
+          GestureDetector(
+            onTap: () => FocusScope.of(context).nextFocus(),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: Colors.black45),
               ),
-              otherOptions: OtherOptions(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+              padding: const EdgeInsets.all(3),
+              child: HtmlEditor(
+                controller: controllerEditor,
+                callbacks: Callbacks(
+                  onFocus: () => FocusScope.of(context).nextFocus(),
+                  onChangeContent: (value) {
+                    controller.editBody.text = value ?? '';
+                  },
                 ),
-              ),
-              htmlEditorOptions: HtmlEditorOptions(initialText: controller.editBody.text),
-              htmlToolbarOptions: HtmlToolbarOptions(
-                defaultToolbarButtons: [
-                  FontButtons(clearAll: false),
-                  ColorButtons(),
-                  ListButtons(listStyles: true),
-                  ParagraphButtons(textDirection: false, lineHeight: false, caseConverter: false),
-                  InsertButtons(
-                    picture: false,
-                    link: false,
-                    video: false,
-                    audio: false,
-                    hr: false,
-                    otherFile: false,
-                  ),
-                  StyleButtons(),
-                  FontSettingButtons(fontSizeUnit: false),
-                ],
-                toolbarPosition: ToolbarPosition.belowEditor,
-                buttonBorderRadius: BorderRadius.circular(10),
+                otherOptions: OtherOptions(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                ),
+
+                htmlEditorOptions: HtmlEditorOptions(initialText: controller.editBody.text),
+                htmlToolbarOptions: HtmlToolbarOptions(
+                  defaultToolbarButtons: [
+                    FontButtons(clearAll: false),
+                    ColorButtons(),
+                    ListButtons(listStyles: true),
+                    ParagraphButtons(textDirection: false, lineHeight: false, caseConverter: false),
+                    InsertButtons(
+                      picture: false,
+                      link: false,
+                      video: false,
+                      audio: false,
+                      hr: false,
+                      otherFile: false,
+                    ),
+                    StyleButtons(),
+                    FontSettingButtons(fontSizeUnit: false),
+                  ],
+                  toolbarPosition: ToolbarPosition.belowEditor,
+                  buttonBorderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
           ),
