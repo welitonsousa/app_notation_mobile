@@ -6,6 +6,8 @@ import 'package:app_notation_mobile/utils/validations.dart';
 import 'package:flutter/material.dart';
 
 class PageChangePassword extends StatefulWidget {
+  const PageChangePassword({Key? key}) : super(key: key);
+
   @override
   _PageChangePasswordState createState() => _PageChangePasswordState();
 }
@@ -22,7 +24,7 @@ class _PageChangePasswordState extends State<PageChangePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Alterar senha"), centerTitle: true),
+      appBar: AppBar(title: const Text("Alterar senha"), centerTitle: true),
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, widget) => _body(),
@@ -66,12 +68,12 @@ class _PageChangePasswordState extends State<PageChangePassword> {
                   focus: lastFocus,
                   controller: controller.editNewConfirmPassword,
                   onEditingComplete: () => unfocus(context),
-                  validator: (value) =>
-                      Validations.confirmPassword(controller.editNewPassword.text, value),
+                  validator: (value) => Validations.confirmPassword(
+                      controller.editNewPassword.text, value),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text("Desconectar todos os dispositivos"),
+                  title: const Text("Desconectar todos os dispositivos"),
                   onTap: controller.changeLogOutAll,
                   leading: Visibility(
                     child: Checkbox(

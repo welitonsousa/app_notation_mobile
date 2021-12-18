@@ -25,23 +25,23 @@ class CustomAvatar extends StatelessWidget {
               child: Container(
                 width: 220,
                 height: 220,
-                child: CustomCircular(size: 40),
+                child: const CustomCircular(size: 40),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(200),
                   border: Border.all(width: 10, color: AppColors.primary),
                 ),
               ),
               replacement: GestureDetector(
-                onTap: this.showActions,
+                onTap: showActions,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(200),
                     border: Border.all(width: 10, color: AppColors.primary),
                   ),
                   child: Visibility(
-                    visible: this.image.isEmpty,
-                    child: this._localAvatar,
-                    replacement: this._networkAvatar,
+                    visible: image.isEmpty,
+                    child: _localAvatar,
+                    replacement: _networkAvatar,
                   ),
                 ),
               ),
@@ -53,7 +53,7 @@ class CustomAvatar extends StatelessWidget {
   }
 
   Widget get _localAvatar {
-    return Icon(
+    return const Icon(
       Icons.person_outline,
       size: 200,
       color: AppColors.primary,
@@ -64,21 +64,22 @@ class CustomAvatar extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(1000),
       child: CachedNetworkImage(
-        imageUrl: this.image,
+        imageUrl: image,
         height: 200,
         width: 200,
         fit: BoxFit.cover,
-        progressIndicatorBuilder: this._loadingImage,
-        errorWidget: (context, url, error) => this._localAvatar,
+        progressIndicatorBuilder: _loadingImage,
+        errorWidget: (context, url, error) => _localAvatar,
       ),
     );
   }
 
   Widget _loadingImage(context, url, downloadProgress) {
-    return Container(
+    return SizedBox(
       height: 200,
       width: 200,
-      child: Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+      child: Center(
+          child: CircularProgressIndicator(value: downloadProgress.progress)),
     );
   }
 
@@ -87,22 +88,22 @@ class CustomAvatar extends StatelessWidget {
       title: "Imagem de perfil",
       options: [
         Visibility(
-          visible: this.image.isNotEmpty,
+          visible: image.isNotEmpty,
           child: TextButton(
-            child: Text("Ver imagem"),
+            child: const Text("Ver imagem"),
             onPressed: () {
               navigator.pop();
               navigator.push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => PageViewImage(this.image),
+                  builder: (BuildContext context) => PageViewImage(image),
                 ),
               );
             },
           ),
         ),
         TextButton(
-          child: Text("Nova imagem"),
-          onPressed: this.imageDirectory,
+          child: const Text("Nova imagem"),
+          onPressed: imageDirectory,
         ),
       ],
     );
@@ -114,14 +115,14 @@ class CustomAvatar extends StatelessWidget {
       title: "Escolha o local da imagem",
       options: [
         TextButton(
-          child: Text("Galeria"),
+          child: const Text("Galeria"),
           onPressed: () {
             navigator.pop();
             controller.openGallery();
           },
         ),
         TextButton(
-          child: Text("Camera"),
+          child: const Text("Camera"),
           onPressed: () {
             navigator.pop();
             controller.openGallery(imageSource: ImageSource.camera);

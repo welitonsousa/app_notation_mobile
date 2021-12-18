@@ -9,28 +9,29 @@ class CustomButton extends StatelessWidget {
   final Color? backgroundColor;
   final bool loading;
   const CustomButton({
+    Key? key,
     required this.label,
     this.onPressed,
     this.backgroundColor,
     this.textColor,
     this.loading = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: Key('custom-button'),
+      key: const Key('custom-button'),
       height: 50,
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: TextButton(
         onPressed: () {
-          if (this.onPressed != null && !this.loading) this.onPressed!();
+          if (onPressed != null && !loading) onPressed!();
         },
         child: Visibility(
           visible: loading,
-          child: CustomCircular(color: AppColors.white),
+          child: const CustomCircular(color: AppColors.white),
           replacement: Text(
-            this.label,
+            label,
             style: TextStyle(color: textColor ?? AppColors.white),
           ),
         ),

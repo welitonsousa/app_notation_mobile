@@ -27,7 +27,7 @@ class _PageProfileState extends State<PageProfile> {
   Widget build(BuildContext context) {
     FocusScope.of(context).unfocus();
     return Scaffold(
-      appBar: AppBar(title: Text("Perfil"), elevation: 0),
+      appBar: AppBar(title: const Text("Perfil"), elevation: 0),
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, widget) => _body,
@@ -45,14 +45,15 @@ class _PageProfileState extends State<PageProfile> {
           child: Center(
             child: Text(
               controller.user.user,
-              style: TextStyle(fontSize: 25),
+              style: const TextStyle(fontSize: 25),
             ),
           ),
         ),
         ListTile(
-          title: Text("Tema do aplicativo", style: TextStyle(fontSize: 20)),
+          title:
+              const Text("Tema do aplicativo", style: TextStyle(fontSize: 20)),
           onTap: ControllerTheme.instance.changeTheme,
-          leading: Container(
+          leading: SizedBox(
             width: 50,
             height: 50,
             child: CustomToggle(value: !ControllerTheme.instance.isDark),

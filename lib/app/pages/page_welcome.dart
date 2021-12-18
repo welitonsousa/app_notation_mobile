@@ -24,21 +24,25 @@ class PageWelcome extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Center(child: Text("App Notation", style: TextStyle(fontSize: 50, fontFamily: "amatic"))),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                      child: Text("App Notation",
+                          style:
+                              TextStyle(fontSize: 50, fontFamily: "amatic"))),
                 ),
                 CustomButton(
-                    label: "Login", onPressed: () => navigator.pushNamed(NamedRoutes.LOGIN)),
+                    label: "Login",
+                    onPressed: () => navigator.pushNamed(NamedRoutes.LOGIN)),
                 Container(height: 10),
-                Center(child: Text("não possui uma conta?")),
+                const Center(child: Text("não possui uma conta?")),
                 CustomButton(
                   label: "Cadastre-se",
                   backgroundColor: AppColors.secondary,
-                  onPressed: () => navigator.pushNamed(NamedRoutes.REGISTRATION),
+                  onPressed: () =>
+                      navigator.pushNamed(NamedRoutes.REGISTRATION),
                 ),
                 Container(height: 20),
-
               ],
             ),
           ),

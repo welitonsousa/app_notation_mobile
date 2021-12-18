@@ -24,6 +24,7 @@ dependencies:
   quick_actions: ^0.6.0+8
 
 dev_dependencies:
+  flutter_lints:
   flutter_test:
     sdk: flutter
 flutter:

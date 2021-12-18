@@ -48,7 +48,8 @@ class ControllerProfile extends ChangeNotifier {
       final Uri emailLaunchUri = Uri(scheme: 'mailto', path: Env.EMAIL_APP);
       await launch(emailLaunchUri.toString());
     } catch (e) {
-      CustomSnackbar.show(text: "Algo deu errado", background: AppColors.danger);
+      CustomSnackbar.show(
+          text: "Algo deu errado", background: AppColors.danger);
     }
   }
 
@@ -56,7 +57,8 @@ class ControllerProfile extends ChangeNotifier {
     try {
       await launch(Env.WEB_ADDRESS);
     } catch (e) {
-      CustomSnackbar.show(text: "Algo deu errado", background: AppColors.danger);
+      CustomSnackbar.show(
+          text: "Algo deu errado", background: AppColors.danger);
     }
   }
 
@@ -69,15 +71,15 @@ class ControllerProfile extends ChangeNotifier {
       if (image != null) {
         final croppedFile = await ImageCropper.cropImage(
           sourcePath: image.path,
-          androidUiSettings: AndroidUiSettings(
+          androidUiSettings: const AndroidUiSettings(
             toolbarTitle: '',
             toolbarColor: AppColors.primary,
             toolbarWidgetColor: AppColors.white,
           ),
-          aspectRatio: CropAspectRatio(ratioX: 4, ratioY: 4),
+          aspectRatio: const CropAspectRatio(ratioX: 4, ratioY: 4),
         );
         if (croppedFile != null) {
-          this.loadingImage = true;
+          loadingImage = true;
           notifyListeners();
           final link = await repo.sendFile(croppedFile.path);
           instance.user.picture = link;

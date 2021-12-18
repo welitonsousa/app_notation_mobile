@@ -9,7 +9,8 @@ class ControllerTeddy {
   static final _left = SimpleAnimation("Look_down_left", autoplay: false);
   static final _right = SimpleAnimation("Look_down_right", autoplay: false);
 
-  get listControllers => [_fail, _pass, _viewpass, _left, _right, _idle, _success];
+  get listControllers =>
+      [_fail, _pass, _viewpass, _left, _right, _idle, _success];
 
   void email() {
     resetLoop();
@@ -31,10 +32,11 @@ class ControllerTeddy {
 
   void check(String value) {
     _success.isActive = false;
-    if (value.length <= 17)
+    if (value.length <= 17) {
       _left.isActive = true;
-    else
+    } else {
       _right.isActive = true;
+    }
   }
 
   void error() {

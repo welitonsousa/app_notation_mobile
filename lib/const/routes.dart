@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:app_notation_mobile/app/models/model_notes.dart';
 import 'package:app_notation_mobile/app/pages/page_change_password.dart';
 import 'package:app_notation_mobile/app/pages/page_home.dart';
@@ -14,13 +16,13 @@ final navigator = navigatorKey.currentState!;
 
 class Routes {
   final Map<String, Widget Function(BuildContext)> routes = {
-    NamedRoutes.SPLASH: (context) => PageSplash(),
-    NamedRoutes.LOGIN: (context) => PageLogin(),
-    NamedRoutes.WELCOME: (context) => PageWelcome(),
-    NamedRoutes.REGISTRATION: (context) => PageRegistration(),
-    NamedRoutes.HOME: (context) => PageHome(),
-    NamedRoutes.CHANGE_PASSWORD: (context) => PageChangePassword(),
-    NamedRoutes.RESET_PASSWORD: (context) => PageResetPass(),
+    NamedRoutes.SPLASH: (context) => const PageSplash(),
+    NamedRoutes.LOGIN: (context) => const PageLogin(),
+    NamedRoutes.WELCOME: (context) => const PageWelcome(),
+    NamedRoutes.REGISTRATION: (context) => const PageRegistration(),
+    NamedRoutes.HOME: (context) => const PageHome(),
+    NamedRoutes.CHANGE_PASSWORD: (context) => const PageChangePassword(),
+    NamedRoutes.RESET_PASSWORD: (context) => const PageResetPass(),
     NamedRoutes.NOTE_FORM: (context) {
       final note = ModalRoute.of(context)?.settings.arguments as ModelNotes?;
       return PageNotesForm(note: note);

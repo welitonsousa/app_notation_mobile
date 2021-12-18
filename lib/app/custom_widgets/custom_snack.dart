@@ -7,14 +7,14 @@ class CustomSnackbar {
   static void show({required String text, Color? background}) {
     ScaffoldMessenger.of(navigator.context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         backgroundColor: background ?? AppColors.success,
-        content: Container(
+        content: SizedBox(
           height: 30,
           child: Center(
             child: Text(
               text,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),
           ),
@@ -27,14 +27,14 @@ class CustomSnackbar {
     String? message = e.response?.data["message"];
     ScaffoldMessenger.of(navigator.context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
         backgroundColor: AppColors.danger,
-        content: Container(
+        content: SizedBox(
           height: 30,
           child: Center(
             child: Text(
               message ?? "Ops, algo deu errado!",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),
           ),

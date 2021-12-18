@@ -18,11 +18,7 @@ class ModelUser {
   }
 
   Map<String, dynamic> toJson() {
-    final data = {
-      "user": this.user,
-      "picture": this.picture,
-      "token": this.token
-    };
+    final data = {"user": user, "picture": picture, "token": token};
     return data;
   }
 }

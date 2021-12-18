@@ -19,30 +19,31 @@ class ControllerNotes extends ChangeNotifier {
   ModelState state = ModelState.stope;
 
   void clearSearch() {
-    this.editSearch.clear();
-    this.notes = [...this.notesOriginal];
+    editSearch.clear();
+    notes = [...notesOriginal];
     notifyListeners();
   }
 
   void search(String value) {
     String search = value.toLowerCase();
     notes = notesOriginal.where((e) {
-      return e.title.toLowerCase().contains(search) || e.body.toLowerCase().contains(search);
+      return e.title.toLowerCase().contains(search) ||
+          e.body.toLowerCase().contains(search);
     }).toList();
     notifyListeners();
   }
 
   Future<void> getNotes({bool isReload = false}) async {
     try {
-      if (this.state == ModelState.stope || isReload) {
-        if (!isReload || state == ModelState.error) this.state = ModelState.loading;
+      if (state == ModelState.stope || isReload) {
+        if (!isReload || state == ModelState.error) state = ModelState.loading;
         notifyListeners();
-        this.notesOriginal = await this.repository.getNotes();
-        this.notes = [...this.notesOriginal];
-        this.state = ModelState.success;
+        notesOriginal = await repository.getNotes();
+        notes = [...notesOriginal];
+        state = ModelState.success;
       }
     } on DioError catch (e) {
-      this.state = ModelState.error;
+      state = ModelState.error;
       CustomSnackbar.error(e);
     } finally {
       notifyListeners();

@@ -6,6 +6,8 @@ import 'package:app_notation_mobile/utils/validations.dart';
 import 'package:flutter/material.dart';
 
 class PageRegistration extends StatefulWidget {
+  const PageRegistration({Key? key}) : super(key: key);
+
   @override
   _PageRegistrationState createState() => _PageRegistrationState();
 }
@@ -23,7 +25,7 @@ class _PageRegistrationState extends State<PageRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cadastre-se"), centerTitle: true),
+      appBar: AppBar(title: const Text("Cadastre-se"), centerTitle: true),
       body: _body(),
     );
   }
@@ -32,9 +34,9 @@ class _PageRegistrationState extends State<PageRegistration> {
     return ListView(
       padding: const EdgeInsets.all(10),
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(
               "App Notation",
               style: TextStyle(fontFamily: "amatic", fontSize: 60),
@@ -50,8 +52,8 @@ class _PageRegistrationState extends State<PageRegistration> {
                 CustomField(
                   label: "Nome de usuário",
                   controller: controller.editName,
-                  validator: (value) =>
-                      Validations.generic(value: value, error: "Nome inválido", min: 3),
+                  validator: (value) => Validations.generic(
+                      value: value, error: "Nome inválido", min: 3),
                 ),
                 CustomField(
                   label: "Email",
@@ -73,8 +75,8 @@ class _PageRegistrationState extends State<PageRegistration> {
                   focus: lastFocus,
                   controller: controller.editConfirmPass,
                   onEditingComplete: () => unfocus(context),
-                  validator: (value) =>
-                      Validations.confirmPassword(controller.editPass.text, value),
+                  validator: (value) => Validations.confirmPassword(
+                      controller.editPass.text, value),
                 ),
                 AnimatedBuilder(
                   animation: controller,

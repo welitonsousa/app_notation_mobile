@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:app_notation_mobile/app/controllers/controller_notes.dart';
@@ -20,9 +19,9 @@ class ControllerNotesDialog extends ChangeNotifier {
 
   void initNote(ModelNotes? note) {
     if (note != null) {
-      this.id = note.id;
-      this.editBody.text = note.body;
-      this.editTitle.text = note.title;
+      id = note.id;
+      editBody.text = note.body;
+      editTitle.text = note.title;
     }
   }
 
@@ -44,7 +43,7 @@ class ControllerNotesDialog extends ChangeNotifier {
     return ModelNotes(
       body: editBody.text,
       title: editTitle.text,
-      id: this.id,
+      id: id,
       date: "",
       userId: "",
     );
@@ -53,17 +52,18 @@ class ControllerNotesDialog extends ChangeNotifier {
   Future<void> saveNote() async {
     if (form.currentState?.validate() ?? false) {
       try {
-        this.loading = true;
+        loading = true;
         notifyListeners();
-        if (this.id.isNotEmpty)
+        if (id.isNotEmpty) {
           await updateNote();
-        else
+        } else {
           await createNote();
+        }
         navigator.pop();
       } on DioError catch (e) {
         CustomSnackbar.error(e);
       } finally {
-        this.loading = false;
+        loading = false;
         Timer.run(() => notifyListeners());
       }
     }

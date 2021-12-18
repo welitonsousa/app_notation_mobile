@@ -3,20 +3,31 @@ import 'package:flutter/material.dart';
 
 class CustomError extends StatelessWidget {
   final Function()? action;
-  CustomError({required this.action});
+  const CustomError({Key? key, required this.action}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(child: Icon(Icons.error_outline, color: AppColors.danger, size: 70)),
+        const Center(
+          child: Icon(
+            Icons.error_outline,
+            color: AppColors.danger,
+            size: 70,
+          ),
+        ),
         Container(height: 20),
-        Center(child: Text("Algo deu errado", style: TextStyle(fontSize: 20))),
+        const Center(
+          child: Text(
+            "Algo deu errado",
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
         Center(
           child: TextButton(
-            child: Text("Tente novamente"),
-            onPressed: this.action,
+            child: const Text("Tente novamente"),
+            onPressed: action,
           ),
         ),
       ],

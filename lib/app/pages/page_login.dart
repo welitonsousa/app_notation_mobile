@@ -29,7 +29,7 @@ class _PageLoginState extends State<PageLogin> {
     return Scaffold(
       body: _body(),
       appBar: AppBar(
-        title: Text("Login"),
+        title: const Text("Login"),
         centerTitle: true,
       ),
     );
@@ -39,7 +39,7 @@ class _PageLoginState extends State<PageLogin> {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       children: [
-        Container(
+        SizedBox(
           height: 300,
           child: GestureDetector(
             onTap: controller.teddyController.resetLoop,
@@ -68,7 +68,8 @@ class _PageLoginState extends State<PageLogin> {
                     label: "Email",
                     controller: controller.editEmail,
                     onTap: controller.teddyController.email,
-                    onChange: (value) => controller.teddyController.check(value),
+                    onChange: (value) =>
+                        controller.teddyController.check(value),
                     enable: !controller.loading,
                     textInputType: TextInputType.emailAddress,
                     validator: (value) => Validations.email(value!),
@@ -97,8 +98,9 @@ class _PageLoginState extends State<PageLogin> {
                   },
                 ),
                 TextButton(
-                  child: Text("Esqueci minha senha"),
-                  onPressed: () => navigator.pushNamed(NamedRoutes.RESET_PASSWORD),
+                  child: const Text("Esqueci minha senha"),
+                  onPressed: () =>
+                      navigator.pushNamed(NamedRoutes.RESET_PASSWORD),
                 ),
               ],
             ),

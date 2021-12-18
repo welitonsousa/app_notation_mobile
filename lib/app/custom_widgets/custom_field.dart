@@ -18,14 +18,15 @@ class CustomField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextCapitalization textCapitalization;
   final int? max;
-  final onEditingComplete;
+  final void Function()? onEditingComplete;
   final Widget? lateralName;
   final Function(String)? onChange;
   final bool center;
   final Widget? icon;
   final Color? bgColor;
 
-  CustomField({
+  const CustomField({
+    Key? key,
     this.onTap,
     this.minLines = 1,
     this.enable,
@@ -47,8 +48,7 @@ class CustomField extends StatefulWidget {
     this.lateralName,
     this.onChange,
     this.bgColor,
-
-  });
+  }) : super(key: key);
 
   @override
   _CustomFieldState createState() => _CustomFieldState();
@@ -59,7 +59,7 @@ class _CustomFieldState extends State<CustomField> {
 
   @override
   void initState() {
-    pass = this.widget.isPass;
+    pass = widget.isPass;
     super.initState();
   }
 
@@ -67,40 +67,42 @@ class _CustomFieldState extends State<CustomField> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
-      decoration: BoxDecoration(color: this.widget.bgColor ?? ControllerTheme.instance.theme.cardColor, borderRadius: BorderRadius.circular(5)),
-      child: new TextFormField(
-        onTap: this.widget.onTap,
-        textCapitalization: this.widget.textCapitalization,
-        maxLength: this.widget.max ?? null,
-        inputFormatters: this.widget.inputFormatters,
+      decoration: BoxDecoration(
+          color: widget.bgColor ?? ControllerTheme.instance.theme.cardColor,
+          borderRadius: BorderRadius.circular(5)),
+      child: TextFormField(
+        onTap: widget.onTap,
+        textCapitalization: widget.textCapitalization,
+        maxLength: widget.max,
+        inputFormatters: widget.inputFormatters,
         obscureText: pass ?? false,
-        controller: this.widget.controller,
-        keyboardType: this.widget.textInputType,
-        textInputAction: this.widget.textInputAction,
-        validator: this.widget.validator,
-        onChanged: this.widget.onChange,
-        minLines: this.widget.minLines,
-        maxLines: this.widget.maxLines,
-        textAlign: this.widget.center ? TextAlign.center : TextAlign.left,
-        focusNode: this.widget.focus,
-        enabled: this.widget.enable ?? true,
+        controller: widget.controller,
+        keyboardType: widget.textInputType,
+        textInputAction: widget.textInputAction,
+        validator: widget.validator,
+        onChanged: widget.onChange,
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
+        textAlign: widget.center ? TextAlign.center : TextAlign.left,
+        focusNode: widget.focus,
+        enabled: widget.enable ?? true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        onEditingComplete: this.widget.onEditingComplete,
+        onEditingComplete: widget.onEditingComplete,
         decoration: InputDecoration(
-          hintText: this.widget.placeholder,
+          hintText: widget.placeholder,
           floatingLabelBehavior: FloatingLabelBehavior.always,
-         
-          border: const OutlineInputBorder(borderSide: const BorderSide()),
-          labelText: this.widget.label,
-          icon: this.widget.lateralName ?? null,
+          border: const OutlineInputBorder(borderSide: BorderSide()),
+          labelText: widget.label,
+          icon: widget.lateralName,
           suffixIcon: Visibility(
-            visible: this.widget.icon != null,
-            child: this.widget.icon ?? Container(width: 0, height: 0),
+            visible: widget.icon != null,
+            child: widget.icon ?? const SizedBox(width: 0, height: 0),
             replacement: Visibility(
               visible: pass != null,
               child: IconButton(
                 onPressed: () => setState(() => pass = !pass!),
-                icon: Icon(pass ?? false ? Icons.visibility_off : Icons.visibility),
+                icon: Icon(
+                    pass ?? false ? Icons.visibility_off : Icons.visibility),
               ),
             ),
           ),

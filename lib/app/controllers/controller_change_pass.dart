@@ -26,13 +26,13 @@ class ControllerChangePass extends ChangeNotifier {
         loading = true;
         notifyListeners();
         await repo.changePassword(
-          logOutAll: this.logOutAll,
+          logOutAll: logOutAll,
           newPass: editNewConfirmPassword.text,
           pass: editPassword.text,
         );
         navigator.pop();
         CustomSnackbar.show(text: "Senha atualizada com sucesso");
-        if (this.logOutAll) ControllerProfile.instance.logOut();
+        if (logOutAll) ControllerProfile.instance.logOut();
       } on DioError catch (e) {
         CustomSnackbar.error(e);
       } finally {

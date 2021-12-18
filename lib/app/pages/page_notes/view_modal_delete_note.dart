@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class ViewModalDeleteNote extends StatefulWidget {
   final ModelNotes note;
-  ViewModalDeleteNote({required this.note});
+  const ViewModalDeleteNote({Key? key, required this.note}) : super(key: key);
 
   @override
   _ViewModalDeleteNoteState createState() => _ViewModalDeleteNoteState();
@@ -30,7 +30,7 @@ class _ViewModalDeleteNoteState extends State<ViewModalDeleteNote> {
         animation: controller,
         builder: (context, snapshot) {
           return Container(
-            constraints: BoxConstraints(maxHeight: 500),
+            constraints: const BoxConstraints(maxHeight: 500),
             child: Scrollbar(
               isAlwaysShown: true,
               child: SingleChildScrollView(
@@ -39,9 +39,9 @@ class _ViewModalDeleteNoteState extends State<ViewModalDeleteNote> {
                   child: Column(
                     children: [
                       Container(height: 20),
-                      this._inputs,
+                      _inputs,
                       Container(height: 20),
-                      this._actions,
+                      _actions,
                       Container(height: 20),
                     ],
                   ),
@@ -59,9 +59,10 @@ class _ViewModalDeleteNoteState extends State<ViewModalDeleteNote> {
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          Icon(Icons.warning_amber_rounded, size: 50, color: AppColors.danger),
+          const Icon(Icons.warning_amber_rounded,
+              size: 50, color: AppColors.danger),
           Container(height: 20),
-          Text(
+          const Text(
             "Você deseja realmente deletar essa anotação?",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
@@ -86,7 +87,7 @@ class _ViewModalDeleteNoteState extends State<ViewModalDeleteNote> {
           child: CustomButton(
             label: "Deletar",
             loading: controller.loadingDelete,
-            onPressed: () => controller.deleteNote(this.widget.note.id),
+            onPressed: () => controller.deleteNote(widget.note.id),
           ),
         )
       ],

@@ -28,9 +28,9 @@ class ModelNotes {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {
-      "id": this.id,
-      "title": this.title,
-      "body": this.body,
+      "id": id,
+      "title": title,
+      "body": body,
     };
     return data;
   }

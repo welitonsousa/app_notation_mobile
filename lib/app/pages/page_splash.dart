@@ -3,6 +3,8 @@ import 'package:app_notation_mobile/const/images.dart';
 import 'package:flutter/material.dart';
 
 class PageSplash extends StatefulWidget {
+  const PageSplash({Key? key}) : super(key: key);
+
   @override
   _PageSplashState createState() => _PageSplashState();
 }
@@ -34,7 +36,7 @@ class _PageSplashState extends State<PageSplash> {
 
   Widget _body() {
     return Center(
-      child: Container(
+      child: SizedBox(
         height: controller.size,
         child: Image.asset(AppImages.LOGO),
       ),

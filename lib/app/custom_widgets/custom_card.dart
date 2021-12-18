@@ -10,7 +10,7 @@ class CustomCard extends StatelessWidget {
       elevation: 10,
       child: Padding(
         padding: const EdgeInsets.all(10),
-        child: this.child,
+        child: child,
       ),
     );
   }

@@ -13,7 +13,7 @@ class PageResetPass extends StatefulWidget {
 
 class _PageResetPassState extends State<PageResetPass> {
   final controller = ControllerResetPass();
-  
+
   @override
   void dispose() {
     controller.dispose();
@@ -23,7 +23,7 @@ class _PageResetPassState extends State<PageResetPass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Redefina sua senha")),
+      appBar: AppBar(title: const Text("Redefina sua senha")),
       body: body,
     );
   }
@@ -31,11 +31,11 @@ class _PageResetPassState extends State<PageResetPass> {
   Widget get body {
     return PageView(
       controller: controller.controllerPage,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       children: [
-        ViewSendEmail(controller: this.controller),
-        ViewValideCode(controller: this.controller),
-        ViewResetPass(controller: this.controller),
+        ViewSendEmail(controller: controller),
+        ViewValideCode(controller: controller),
+        ViewResetPass(controller: controller),
       ],
     );
   }

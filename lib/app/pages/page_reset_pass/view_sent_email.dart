@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ViewSendEmail extends StatefulWidget {
   final ControllerResetPass controller;
-  const ViewSendEmail({required this.controller});
+  const ViewSendEmail({Key? key, required this.controller}) : super(key: key);
 
   @override
   _ViewSendEmailState createState() => _ViewSendEmailState();
@@ -16,7 +16,7 @@ class _ViewSendEmailState extends State<ViewSendEmail> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: this.widget.controller,
+      animation: widget.controller,
       builder: (context, snapshot) {
         return Scaffold(
           body: body,
@@ -35,8 +35,8 @@ class _ViewSendEmailState extends State<ViewSendEmail> {
           padding: const EdgeInsets.all(10),
           child: CustomButton(
             label: "Próximo",
-            loading: this.widget.controller.loadingButton,
-            onPressed: this.widget.controller.sendEmail,
+            loading: widget.controller.loadingButton,
+            onPressed: widget.controller.sendEmail,
           ),
         ),
       ],
@@ -47,8 +47,8 @@ class _ViewSendEmailState extends State<ViewSendEmail> {
     return ListView(
       padding: const EdgeInsets.all(10),
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 50),
           child: Text(
             "Enviaremos um código único de verificação da conta através do seu email",
             style: TextStyle(fontSize: 23),
@@ -56,13 +56,13 @@ class _ViewSendEmailState extends State<ViewSendEmail> {
           ),
         ),
         Form(
-          key: this.widget.controller.formEmail,
+          key: widget.controller.formEmail,
           child: CustomField(
             label: "Email",
             bgColor: Colors.transparent,
             textInputType: TextInputType.emailAddress,
-            enable: !this.widget.controller.loadingButton,
-            controller: this.widget.controller.editEmail,
+            enable: !widget.controller.loadingButton,
+            controller: widget.controller.editEmail,
             validator: Validations.email,
           ),
         )

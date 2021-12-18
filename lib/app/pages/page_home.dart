@@ -38,7 +38,7 @@ class _PageHomeState extends State<PageHome> {
       onTap: controller.changePage,
       currentIndex: controller.index,
       showUnselectedLabels: false,
-      items: [
+      items: const [
         BottomNavigationBarItem(
           label: "Notas",
           icon: Icon(Icons.notes),
@@ -57,8 +57,8 @@ class _PageHomeState extends State<PageHome> {
       child: PageView(
         controller: controller.pageController,
         onPageChanged: controller.changeIndex,
-        physics: ClampingScrollPhysics(),
-        children: [
+        physics: const ClampingScrollPhysics(),
+        children: const [
           PageNotes(),
           PageProfile(),
         ],

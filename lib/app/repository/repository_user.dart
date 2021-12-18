@@ -42,7 +42,7 @@ class RepositoryUser {
     });
   }
 
-  Future<String> sendFile(String path, {String? message}) async {
+  Future<String> sendFile(String path) async {
     String fileName = path.split('/').last;
     
     FormData data = FormData.fromMap({

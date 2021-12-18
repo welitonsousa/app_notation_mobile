@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class Env {
   static const TITLE = "App Notation";
   static const BASE_URL = "https://apinotation.herokuapp.com";

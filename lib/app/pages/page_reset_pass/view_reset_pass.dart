@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ViewResetPass extends StatefulWidget {
   final ControllerResetPass controller;
-  const ViewResetPass({required this.controller});
+  const ViewResetPass({Key? key, required this.controller}) : super(key: key);
 
   @override
   _ViewResetPassState createState() => _ViewResetPassState();
@@ -16,7 +16,7 @@ class _ViewResetPassState extends State<ViewResetPass> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: this.widget.controller,
+      animation: widget.controller,
       builder: (context, snapshot) {
         return Scaffold(
           body: body,
@@ -35,8 +35,8 @@ class _ViewResetPassState extends State<ViewResetPass> {
           padding: const EdgeInsets.all(10),
           child: CustomButton(
             label: "Confirmar",
-            loading: this.widget.controller.loadingButton,
-            onPressed: this.widget.controller.resetPass,
+            loading: widget.controller.loadingButton,
+            onPressed: widget.controller.resetPass,
           ),
         ),
       ],
@@ -47,8 +47,8 @@ class _ViewResetPassState extends State<ViewResetPass> {
     return ListView(
       padding: const EdgeInsets.all(10),
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 50),
           child: Text(
             "Todos os dispositivos conectados a esta conta serão desconectados",
             style: TextStyle(fontSize: 24),
@@ -56,23 +56,23 @@ class _ViewResetPassState extends State<ViewResetPass> {
           ),
         ),
         Form(
-          key: this.widget.controller.formNewPass,
+          key: widget.controller.formNewPass,
           child: Column(
             children: [
               CustomField(
                 label: "Nova senha",
-                enable: !this.widget.controller.loadingButton,
-                controller: this.widget.controller.editNewPass,
+                enable: !widget.controller.loadingButton,
+                controller: widget.controller.editNewPass,
                 isPass: true,
                 validator: Validations.password,
               ),
               CustomField(
                 label: "Confirme a senha",
-                enable: !this.widget.controller.loadingButton,
-                controller: this.widget.controller.editConfirmNewPass,
+                enable: !widget.controller.loadingButton,
+                controller: widget.controller.editConfirmNewPass,
                 isPass: true,
                 validator: (value) => Validations.confirmPassword(
-                  this.widget.controller.editNewPass.text,
+                  widget.controller.editNewPass.text,
                   value,
                 ),
               ),

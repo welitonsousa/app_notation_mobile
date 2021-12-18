@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ViewValideCode extends StatefulWidget {
   final ControllerResetPass controller;
-  const ViewValideCode({required this.controller});
+  const ViewValideCode({Key? key, required this.controller}) : super(key: key);
 
   @override
   _ViewValideCodeState createState() => _ViewValideCodeState();
@@ -16,7 +16,7 @@ class _ViewValideCodeState extends State<ViewValideCode> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: this.widget.controller,
+      animation: widget.controller,
       builder: (context, snapshot) {
         return Scaffold(
           body: body,
@@ -35,8 +35,8 @@ class _ViewValideCodeState extends State<ViewValideCode> {
           padding: const EdgeInsets.all(10),
           child: CustomButton(
             label: "Próximo",
-            loading: this.widget.controller.loadingButton,
-            onPressed: this.widget.controller.valideCode,
+            loading: widget.controller.loadingButton,
+            onPressed: widget.controller.valideCode,
           ),
         ),
       ],
@@ -47,23 +47,26 @@ class _ViewValideCodeState extends State<ViewValideCode> {
     return ListView(
       padding: const EdgeInsets.all(10),
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 50),
           child: Text.rich(
-            TextSpan(text: "Enviamos um código de verificação para o seu email", children: [
-              TextSpan(
-                  text: "\n\nVerifique também a caixa de Spam", style: TextStyle(fontSize: 14))
-            ]),
+            TextSpan(
+                text: "Enviamos um código de verificação para o seu email",
+                children: [
+                  TextSpan(
+                      text: "\n\nVerifique também a caixa de Spam",
+                      style: TextStyle(fontSize: 14))
+                ]),
             style: TextStyle(fontSize: 23),
             textAlign: TextAlign.center,
           ),
         ),
         Form(
-          key: this.widget.controller.formCode,
+          key: widget.controller.formCode,
           child: CustomField(
             label: "Código",
-            enable: !this.widget.controller.loadingButton,
-            controller: this.widget.controller.editCode,
+            enable: !widget.controller.loadingButton,
+            controller: widget.controller.editCode,
             textCapitalization: TextCapitalization.characters,
             max: 5,
             validator: (value) => Validations.generic(

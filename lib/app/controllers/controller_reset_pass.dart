@@ -19,7 +19,8 @@ class ControllerResetPass extends ChangeNotifier {
   bool loadingButton = false;
 
   void nextPage() {
-    controllerPage.nextPage(curve: Curves.linear, duration: Duration(milliseconds: 300));
+    controllerPage.nextPage(
+        curve: Curves.linear, duration: const Duration(milliseconds: 300));
   }
 
   Future<void> sendEmail() async {
@@ -28,7 +29,7 @@ class ControllerResetPass extends ChangeNotifier {
         loadingButton = true;
         notifyListeners();
         await repo.sendEmailCode(email: editEmail.text);
-        this.nextPage();
+        nextPage();
       } on DioError catch (e) {
         CustomSnackbar.error(e);
       } finally {
@@ -59,7 +60,10 @@ class ControllerResetPass extends ChangeNotifier {
       try {
         loadingButton = true;
         notifyListeners();
-        await repo.resetPass(email: editEmail.text, code: editCode.text, newPass: editNewPass.text);
+        await repo.resetPass(
+            email: editEmail.text,
+            code: editCode.text,
+            newPass: editNewPass.text);
         navigator.pop();
         CustomSnackbar.show(text: "Sua senha foi alterada");
       } on DioError catch (e) {

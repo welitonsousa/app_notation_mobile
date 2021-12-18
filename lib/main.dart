@@ -8,31 +8,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences prefs;
 void main() async {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 String fastAction = "";
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
   final routes = Routes();
   final controller = ControllerTheme.instance;
 
   @override
   void initState() {
     initializeDateFormatting();
-    this.getInstancePrefs();
-    this.quickActions();
+    getInstancePrefs();
+    quickActions();
     super.initState();
   }
 
   void quickActions() {
-    final QuickActions quickActions = QuickActions();
+    const QuickActions quickActions = QuickActions();
     quickActions.initialize((String? shortcutType) {
       fastAction = shortcutType ?? "";
     });

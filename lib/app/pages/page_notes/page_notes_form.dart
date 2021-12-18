@@ -11,20 +11,20 @@ import 'package:html_editor_enhanced/html_editor.dart';
 class PageNotesForm extends StatefulWidget {
   final ModelNotes? note;
 
-  PageNotesForm({this.note});
+  const PageNotesForm({Key? key, this.note}) : super(key: key);
 
   @override
   _PageNotesFormState createState() => _PageNotesFormState();
 }
 
 class _PageNotesFormState extends State<PageNotesForm> {
-  final focusTitle = new FocusNode();
+  final focusTitle = FocusNode();
   final controller = ControllerNotesDialog();
   HtmlEditorController controllerEditor = HtmlEditorController();
 
   @override
   void initState() {
-    controller.initNote(this.widget.note);
+    controller.initNote(widget.note);
     super.initState();
   }
 
@@ -40,12 +40,12 @@ class _PageNotesFormState extends State<PageNotesForm> {
       animation: controller,
       builder: (context, snapshot) {
         return Scaffold(
-          appBar: AppBar(title: Text("Nota")),
-          bottomNavigationBar: this._actions,
+          appBar: AppBar(title: const Text("Nota")),
+          bottomNavigationBar: _actions,
           body: ListView(
             padding: const EdgeInsets.all(10),
             children: [
-              this._inputs(),
+              _inputs(),
               Container(height: 100),
             ],
           ),
@@ -61,7 +61,7 @@ class _PageNotesFormState extends State<PageNotesForm> {
         children: [
           CustomField(
             label: "Titulo",
-            focus: this.focusTitle,
+            focus: focusTitle,
             enable: !controller.loading,
             controller: controller.editTitle,
             validator: (value) => Validations.generic(value: value),
@@ -83,16 +83,20 @@ class _PageNotesFormState extends State<PageNotesForm> {
                   },
                 ),
                 otherOptions: OtherOptions(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 ),
-
-                htmlEditorOptions: HtmlEditorOptions(initialText: controller.editBody.text),
+                htmlEditorOptions:
+                    HtmlEditorOptions(initialText: controller.editBody.text),
                 htmlToolbarOptions: HtmlToolbarOptions(
-                  defaultToolbarButtons: [
+                  defaultToolbarButtons: const [
                     FontButtons(clearAll: false),
                     ColorButtons(),
                     ListButtons(listStyles: true),
-                    ParagraphButtons(textDirection: false, lineHeight: false, caseConverter: false),
+                    ParagraphButtons(
+                        textDirection: false,
+                        lineHeight: false,
+                        caseConverter: false),
                     InsertButtons(
                       picture: false,
                       link: false,
