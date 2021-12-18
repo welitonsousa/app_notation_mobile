@@ -58,7 +58,7 @@ class _PageHomeState extends State<PageHome> {
 
   Widget _body() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 50),
+      padding: const EdgeInsets.only(bottom: 80),
       child: PageView(
         controller: controller.pageController,
         onPageChanged: (index) {

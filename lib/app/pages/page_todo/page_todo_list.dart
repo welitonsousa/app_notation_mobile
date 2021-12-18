@@ -1,6 +1,7 @@
 import 'package:app_notation_mobile/app/controllers/todos/controller_todo_list.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_card.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_empty.dart';
+import 'package:app_notation_mobile/app/custom_widgets/custom_error.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_field.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_loading.dart';
 import 'package:app_notation_mobile/app/models/model_state.dart';
@@ -40,9 +41,11 @@ class _PageTodoListState extends State<PageTodoList> {
 
   Widget get body {
     if (controller.stateList == ModelState.loading) {
-      return const CustomCircular();
+      return const CustomCircular(size: 40);
+    } else if (controller.stateList == ModelState.error) {
+      return CustomError(action: () => controller.getAllTodos(update: true));
     } else if (controller.listTodos.isEmpty) {
-      return CustomEmpty(action: controller.getAllTodos);
+      return CustomEmpty(action: () => controller.getAllTodos(update: true));
     }
     return RefreshIndicator(
       onRefresh: () async => await controller.getAllTodos(update: true),
