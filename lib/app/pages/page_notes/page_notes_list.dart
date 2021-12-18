@@ -101,7 +101,7 @@ class _PageNotesState extends State<PageNotes> {
         trailing: deleteItem(note),
         onTap: () {
           FocusScope.of(context).unfocus();
-          navigator.pushNamed(NamedRoutes.NOTE_FORM, arguments: note);
+          navigator.pushNamed(NamedRoutes.NOTE_FORM, arguments: {"note": note});
         },
       ),
     );

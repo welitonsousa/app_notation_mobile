@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:app_notation_mobile/app/controllers/controller_notes.dart';
+import 'package:app_notation_mobile/app/controllers/todos/controller_todo_list.dart';
 import 'package:app_notation_mobile/app/custom_widgets/custom_snack.dart';
 import 'package:app_notation_mobile/app/models/model_user.dart';
 import 'package:app_notation_mobile/app/repository/repository_user.dart';
@@ -38,8 +39,10 @@ class ControllerProfile extends ChangeNotifier {
   Future<void> logOut() async {
     await prefs.setString("user", "{}");
     ControllerNotes.instance = ControllerNotes();
+    ControllerTodoList.instance = ControllerTodoList();
     navigator.popUntil(ModalRoute.withName(NamedRoutes.WELCOME));
     dio.options = options;
+    dio.options.headers = {};
     navigator.pushNamed(NamedRoutes.WELCOME);
   }
 

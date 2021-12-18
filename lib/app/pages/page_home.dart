@@ -2,6 +2,7 @@ import 'package:app_notation_mobile/app/controllers/controller_home.dart';
 import 'package:app_notation_mobile/app/controllers/controller_profile.dart';
 import 'package:app_notation_mobile/app/pages/page_notes/page_notes_list.dart';
 import 'package:app_notation_mobile/app/pages/page_profile.dart';
+import 'package:app_notation_mobile/app/pages/page_todo/page_todo_list.dart';
 import 'package:flutter/material.dart';
 
 class PageHome extends StatefulWidget {
@@ -37,14 +38,18 @@ class _PageHomeState extends State<PageHome> {
     return BottomNavigationBar(
       onTap: controller.changePage,
       currentIndex: controller.index,
-      showUnselectedLabels: false,
+      selectedIconTheme: const IconThemeData(size: 30),
       items: const [
         BottomNavigationBarItem(
-          label: "Notas",
+          label: "Notas\n",
           icon: Icon(Icons.notes),
         ),
         BottomNavigationBarItem(
-          label: "Perfil",
+          label: "Tarefas\n",
+          icon: Icon(Icons.table_rows_outlined),
+        ),
+        BottomNavigationBarItem(
+          label: "Perfil\n",
           icon: Icon(Icons.person_outline),
         ),
       ],
@@ -56,10 +61,13 @@ class _PageHomeState extends State<PageHome> {
       padding: const EdgeInsets.only(bottom: 50),
       child: PageView(
         controller: controller.pageController,
-        onPageChanged: controller.changeIndex,
+        onPageChanged: (index) {
+          controller.changeIndex(index);
+        },
         physics: const ClampingScrollPhysics(),
         children: const [
           PageNotes(),
+          PageTodoList(),
           PageProfile(),
         ],
       ),
